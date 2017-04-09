@@ -36,9 +36,9 @@
 
 6.  Uses Blender's render property settings by default, or set script override settings.
 7.  Make videos that are streamable and will process faster on services like YouTube.
-8.  Use the most current version of FFmpeg, or even use a custom builds with libfdk_aac
+8.  Use the most current version of FFmpeg, or even use a custom build with libfdk_aac
 9.  Double click rendering. The script creates a reusable, clickable, executable.
-10. It's a well commented script, so you can easily review it and edit it without recompiling.
+10. It's a well commented script, so you can easily review it and edit it without compiling.
 11. Render on headless video rendering server by installing Linux, FFmpeg and Blender on a spare computer.
 12. It's GPL licensed, so you can adapt it, improve it, and redistribute it.
 13. It was created by [Blender Video Editing Series](https://www.youtube.com/playlist?list=PLjyuVPBuorqIhlqZtoIvnAVQ3x18sNev4) teacher, "Mikeycal." So you can count on great support. ;) 
