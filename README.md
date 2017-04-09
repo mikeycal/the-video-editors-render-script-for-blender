@@ -12,7 +12,7 @@
 - [Side note](#side-note)
 - [Support Me or Lend a Hand](#support-me-or-lend-a-hand) 
 
-[![Send a Donation to Mikeycal](https://github.com/mikeycal/video-editors-render-script/blob/master/imgs/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=2EU5ANN3XVLH4)
+[![Send a Donation to Mikeycal](https://github.com/mikeycal/the-video-editors-render-script-for-blender/blob/master/imgs/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=2EU5ANN3XVLH4)
 
 ***
 
@@ -53,7 +53,7 @@
 - Source Code Editor with Syntax Highlighting to edit the Script
 
 ## Download a Source Code Editor that supports Python:
-![Source Code Editor](https://github.com/mikeycal/video-editors-render-script/blob/master/imgs/syntax_highlight.JPG)
+![Source Code Editor](https://github.com/mikeycal/the-video-editors-render-script-for-blender/blob/master/imgs/syntax_highlight.JPG)
 
 At times you will need to edit this Python Script. So I would advise that you download a free Source Code editor for your platform of choice. Here are my recommendations:
   - Windows: https://atom.io/ or https://notepad-plus-plus.org/
@@ -76,13 +76,13 @@ At times you will need to edit this Python Script. So I would advise that you do
 ## Microsoft Windows 10 Setup
 
 ### 32-BIT or 64-BIT Windows ? (3 Steps)
-![System Type](https://github.com/mikeycal/video-editors-render-script/blob/master/imgs/systemtype.JPG)
+![System Type](https://github.com/mikeycal/the-video-editors-render-script-for-blender/blob/master/imgs/systemtype.JPG)
 1.  On Windows 10, Click 'Start Menu.'
 2. Type: About Your PC (press enter). 
 3. See what it says next to 'System Type'. If "System Type" says '64-bit operating system', then your computer should use the 64-bit version of ffmpeg, otherwise use 32-bit version of ffmpeg
 
 ### Setup FFmpeg (6 Steps)
-![get ffmpeg for windows](https://github.com/mikeycal/video-editors-render-script/blob/master/imgs/ffmpeg_win.jpg)
+![get ffmpeg for windows](https://github.com/mikeycal/the-video-editors-render-script-for-blender/blob/master/imgs/ffmpeg_win.jpg)
 1. Download the latest build of ffmpeg for Windows at the following URL: https://ffmpeg.zeranoe.com/builds/ That URL is the Official URL recommended by the official website: https://ffmpeg.org/download.html#build-windows 
 2. Get the Static 'Release' (3.2.4 or higher), for your Architecture
 3. Unzip the ffmpeg-version-date-static.zip file by right clicking on it and selecting 'Extract All...' 
@@ -91,7 +91,7 @@ At times you will need to edit this Python Script. So I would advise that you do
 6. FFmpeg is now installed and will work with this script
 
 ### Blender Setup (Assumes default install path of .msi installer)
-![Blender Windows](https://github.com/mikeycal/video-editors-render-script/blob/master/imgs/blender_win.JPG)
+![Blender Windows](https://github.com/mikeycal/the-video-editors-render-script-for-blender/blob/master/imgs/blender_win.JPG)
 
 This script assumes that blender is saved to the following default path: "C:\Program Files\Blender Foundation\Blender\blender.exe" this is the default path when you install blender using the *.msi* Installer. You can get that Installer at the following link: https://www.blender.org/download/ If you choose to install Blender in a different place, please set a custom path in this script.
 
@@ -128,7 +128,7 @@ This script assumes that blender is saved to the following default path: "C:\Pro
 ## Apple OSX Setup (Kernel is called Darwin)
 
 ### Setup FFmpeg (2 Steps)
-![ffmpeg osx](https://github.com/mikeycal/video-editors-render-script/blob/master/imgs/ffmpeg_osx.JPG)
+![ffmpeg osx](https://github.com/mikeycal/the-video-editors-render-script-for-blender/blob/master/imgs/ffmpeg_osx.JPG)
 
 1. Go to https://evermeet.cx/ffmpeg/ and download the Static FFmpeg build, on the right, called ffmpeg-3.2.4.dmg (or higer version). Make sure that you download the DMG and not the .7z version. (Note: https://evermeet.cx/ffmpeg is the
 official link that is pointed to from ffmpeg.org: http://ffmpeg.org/download.html#build-mac) (Alteratively, there are FFmpeg builds for OSX 10.6 - 10.8 here: http://www.ffmpegmac.net/) 
@@ -189,7 +189,7 @@ Alternatively:
 ### Setup latest FFmpeg from website  (2 Steps)
 1. Download ffmpeg static build from https://www.johnvansickle.com/ffmpeg/ (This is the URL that is pointed to on http://ffmpeg.org/download.html#build-linux 
 
-![ffmpeg Linux](https://github.com/mikeycal/video-editors-render-script/blob/master/imgs/linux_ffmpeg.JPG)
+![ffmpeg Linux](https://github.com/mikeycal/the-video-editors-render-script-for-blender/blob/master/imgs/linux_ffmpeg.JPG)
 
 2. Unzip archive with `tar -xvf ffmpeg-release-64bit-static.tar.xz`
 
@@ -304,7 +304,7 @@ If you would like to see how different GIF settings alter your video, refer to t
 
 I rendered the same video using different _dither_ and _stat_mode_ settings. Here are the file size results to compare. (See image quality difference [here](http://blog.pkh.me/p/21-high-quality-gif-with-ffmpeg.html). )
 
-![gif file size](https://github.com/mikeycal/video-editors-render-script/blob/master/imgs/comparegif.JPG)
+![gif file size](https://github.com/mikeycal/the-video-editors-render-script-for-blender/blob/master/imgs/comparegif.JPG)
                                                                               
 10. **How do I set Automatic .blend file settings?**
      - On line 203 you can add settings that you want to be used as overrides. These settings will override anything that you have set in the _Blender Render Properties_ window of blender. It's important to note that `scene.render.ffmpeg.audio_codec = 'NONE'\n` must be included. It turns off the audio for your project. Audio is rendered separately with this script, so it must be turned off when the video is rendering. Leaving audio on will simply slow down the render.
@@ -340,4 +340,4 @@ Isti115 has developed his own program that also utilizes the multi-core process 
  I consider this script a work in progress. I hope to add features as needed.  It's important to note that this Python Script is my first time using Python. So I'm still learning and any helpful tips on using Python would also be appreciated. If you have any suggestions on features, find bugs, or if you have added some feature that you think I should include, send me an email at mikeycaldotcom@yahoo.com . If you want to help me out, you can [send me a Paypal donation](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=2EU5ANN3XVLH4) at my Yahoo address or help me make the code better. In addition, visit my website at http://Mikeycal.com and see what I'm up to lately. I am dedicated to providing cross platform resources and instructional videos free of charge. Checkout my Blender Video Editing Series at the following link:
  https://www.youtube.com/playlist?list=PLjyuVPBuorqIhlqZtoIvnAVQ3x18sNev4
 
-[![Send a Donation to Mikeycal](https://github.com/mikeycal/video-editors-render-script/blob/master/imgs/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=2EU5ANN3XVLH4)
+[![Send a Donation to Mikeycal](https://github.com/mikeycal/the-video-editors-render-script-for-blender/blob/master/imgs/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=2EU5ANN3XVLH4)
