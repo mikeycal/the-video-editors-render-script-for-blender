@@ -18,11 +18,12 @@
 
 ## Core Features:
 1.  Perform non-3D renders in a _THIRD_ to _HALF_ the time on multi-core CPUs.
-     - Significant speedup when rendering:
+     - when ONLY using the "VSE pipeline" you can speed up render times for the following:
         - Videos
         - Image Sequences
-        - Compositing with following node groups (without 3D [Render Layers] node):
+        - Node Based effects using the following node groups:
            - Distort, Matte, Map, Vector, Filter, Converter, and Color
+           - _Note: 3D [Render Layers] node must be omitted_
 
 2.  Supports all Blender audio, video and image codecs.
 3.  Use 8kb/s - 640kb/s compressed audio instead of Blender's 32kb/s - 384kb/s limit.
