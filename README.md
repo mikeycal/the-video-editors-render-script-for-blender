@@ -333,14 +333,6 @@ I rendered the same video using different _dither_ and _stat_mode_ settings. Her
 
 `"    scene.render.ffmpeg.use_lossless_output = False\n"`
 
-`"    scene.render.ffmpeg.audio_codec = AAC\n"`
-
-`"    scene.render.ffmpeg.audio_bitrate = 192\n"`
-
-`"    scene.render.ffmpeg.audio_channels = False\n"`
-
-`"    scene.render.ffmpeg.audio_volume = 1.0\n"`     [1.0 = 100% volume]
-
 `"    scene.render.ffmpeg.minrate = 0\n"`    
 
 `"    scene.render.ffmpeg.maxrate = 9000\n"`
@@ -350,8 +342,6 @@ I rendered the same video using different _dither_ and _stat_mode_ settings. Her
 `"    scene.render.ffmpeg.packetsize = 2048\n"` 
 
 `"    scene.render.ffmpeg.buffersize = 1792\n"` 
-
-`"    scene.render.ffmpeg.audio_mixrate = 44100\n"`     [44100,48000,96000,192000]
 
 `"    scene.render.fps = 24\n"` 
 
