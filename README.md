@@ -18,7 +18,7 @@
 
 ## Core Features:
 1.  Perform non-3D renders in a _THIRD_ to _HALF_ the time on multi-core CPUs.
-     - When ONLY using the "VSE pipeline" you can speed up render times for the following:
+     - Speed up render times for the following:
         - Videos
         - Image Sequences
         - Node Based effects using the following node groups:
