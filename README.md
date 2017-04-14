@@ -41,7 +41,7 @@
 10. It's a well commented script, so you can easily review it and edit it without compiling.
 11. Render on headless video rendering server by installing Linux, FFmpeg and Blender on a spare computer.
 12. It's GPL licensed, so you can adapt it, improve it, and redistribute it.
-13. It was created by [Blender Video Editing Series](https://www.youtube.com/playlist?list=PLjyuVPBuorqIhlqZtoIvnAVQ3x18sNev4) teacher, "Mikeycal." So you can count on great support. ;) 
+13. Developed and maintained by [Blender Video Editing Series](https://www.youtube.com/playlist?list=PLjyuVPBuorqIhlqZtoIvnAVQ3x18sNev4) instructor, "Mikeycal." ;) 
 
 ***
 
@@ -308,6 +308,59 @@ I rendered the same video using different _dither_ and _stat_mode_ settings. Her
                                                                               
 10. **How do I set Automatic .blend file settings?**
      - On line 203 you can add settings that you want to be used as overrides. These settings will override anything that you have set in the _Blender Render Properties_ window of blender. It's important to note that `scene.render.ffmpeg.audio_codec = 'NONE'\n` must be included. It turns off the audio for your project. Audio is rendered separately with this script, so it must be turned off when the video is rendering. Leaving audio on will simply slow down the render.
+
+- - - - - - - 
+**Some common override settings you can use include the following:**
+
+(Python requires 4 spaces before scene.render.*)
+
+`"    scene.render.resolution_x = 800\n"`
+
+`"    scene.render.resolution_y = 600\n"`
+
+`"    scene.render.resolution_percentage = 100\n"`
+
+`"    scene.render.image_settings.file_format = XVID\n"`
+
+`"    scene.render.ffmpeg.format = MPEG4\n"`
+
+`"    scene.render.ffmpeg.codec = H264\n"`
+
+`"    scene.render.ffmpeg.video_bitrate = 8000\n"`
+
+`"    scene.render.ffmpeg.gopsize = 18\n"`
+
+`"    scene.render.ffmpeg.use_lossless_output = False\n"`
+
+`"    scene.render.ffmpeg.audio_codec = AAC\n"`
+
+`"    scene.render.ffmpeg.audio_bitrate = 192\n"`
+
+`"    scene.render.ffmpeg.audio_channels = False\n"`
+
+`"    scene.render.ffmpeg.audio_volume = 1.0\n"`     [1.0 = 100% volume]
+
+`"    scene.render.ffmpeg.minrate = 0\n"`    
+
+`"    scene.render.ffmpeg.maxrate = 9000\n"`
+
+`"    scene.render.ffmpeg.muxrate = 10080000\n"`  
+
+`"    scene.render.ffmpeg.packetsize = 2048\n"` 
+
+`"    scene.render.ffmpeg.buffersize = 1792\n"` 
+
+`"    scene.render.ffmpeg.audio_mixrate = 44100\n"`     [44100,48000,96000,192000]
+
+`"    scene.render.fps = 24\n"` 
+
+`"    scene.render.fps_base = 1.001\n"`
+
+
+Note blender frame rate is determined by the following formula:
+
+ round(scene.render.fps / scene.render.fps_base,2)     [23.98]
+- - - - - - - 
 
 ***
 
