@@ -62,7 +62,7 @@ At times you will need to edit this Python Script. So I would advise that you do
   - GNU/Linux: https://atom.io/, gedit, kate
 
 ## Tested and Working:
-- Windows 10 (v1607)
+- Windows 10 (v1607)[Anniversary Update] and (v1703)[Creators Update]
 - OSX 10.11
 - GNU/Linux (Ubuntu 16.04 LTS) (Arch Linux [tested 3/30/17])
 
