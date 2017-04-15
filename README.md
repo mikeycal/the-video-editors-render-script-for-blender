@@ -23,7 +23,7 @@
         - Image Sequences
         - Node Based effects using the following node groups:
            - Distort, Matte, Map, Vector, Filter, Converter, and Color
-           - _Note: 3D [Render Layers] node must be omitted_
+             - _Note: 3D [Render Layers] node must be omitted_
 
 2.  Supports all Blender audio, video and image codecs.
 3.  Use 8kb/s - 640kb/s compressed audio instead of Blender's 32kb/s - 384kb/s limit.
