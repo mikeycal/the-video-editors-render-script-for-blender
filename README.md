@@ -17,7 +17,7 @@
 ***
 
 ## Core Features:
-1.  Perform non-3D renders in a _THIRD_ to _HALF_ the time on multi-core CPUs.
+1.  Perform non-3D renders in _HALF_ the time on multi-core CPUs.
      - Speed up render times for the following:
         - Videos
         - Image Sequences
@@ -28,7 +28,7 @@
 2.  Supports all Blender audio, video and image codecs.
 3.  Use 8kb/s - 640kb/s compressed audio instead of Blender's 32kb/s - 384kb/s limit.
 4.  Create animated GIFs with your Blender video project
-     - Uses palettegen, supports all dither methods and allows scaling   
+     - Uses high quality palettegen, supports all dither methods and allows scaling   
 5.  Fully cross platform 
      - Windows
      - OSX
