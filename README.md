@@ -199,7 +199,7 @@ Alternatively:
 
 2. Unzip with `tar -jxvf blender-2.78c-linux-glibc219-x86_64.tar.bz2`
 
-### Running the Script (8 Steps)
+### Running the Script (9 Steps)
 
 1. If necessary, use your source code editor to set the path to FFmpeg and Blender. You need to go to line 109 and 110 in video_editors_render_script.py
 
@@ -209,21 +209,25 @@ Alternatively:
                 blender
                 ffmpeg
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-2. Put the Script in any folder and "SAVE AS..." your custom blend file as "1.blend" to the same folder. 
+2. Linux and other *nix platforms can specifiy a spercific terminal to run script from. Some popular options include the following:
+    -  `"gnome-terminal -e"`, `"konsole -e"`, `"xterm -e"`, `"guake -e"`, `"terminator -e"`
+        - If no terminal is specified on Linux or *nix systems, the "click_me" fearture (line 112) will run, hidden, in the background.
 
-3. Open Terminal window and go to the directory where your files are located.
+3. Put the Script in any folder and "SAVE AS..." your custom blend file as "1.blend" to the same folder. 
 
-4. Run this script from the same folder using the Terminal:
+4. Open Terminal window and go to the directory where your files are located.
+
+5. Run this script from the same folder using the Terminal:
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 `blender -b 1.blend -P video_editors_render_script.py`
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-5. The script will create a clickable executable, in the same directory, that you can use for all future renders. (Linux_Click_to_Render.sh)
+6. The script will create a clickable executable, in the same directory, that you can use for all future renders. (Linux_Click_to_Render.sh)
 
-6. It's important to note that often linux environments are setup to prohibit executing .sh scripts by clicking. But you can usually turn that feature on in the preferences of your favorite linux file manager. On my linux setup, I set clicking an .sh file to PROMPT me. The prompt dialog asks if I would like to open in an editor or run the script. This is the option I recommend using. 
+7. It's important to note that often linux environments are setup to prohibit executing .sh scripts by clicking. But you can usually turn that feature on in the preferences of your favorite linux file manager. On my linux setup, I set clicking an .sh file to PROMPT me. The prompt dialog asks if I would like to open in an editor or run the script. This is the option I recommend using. 
 
-7. Check CPU and RAM usage by typing "top" into the terminal
+8. Check CPU and RAM usage by typing "top" into the terminal
 
-8. [Goto the "Configuring the Script" Section](#configuring-the-script)
+9. [Goto the "Configuring the Script" Section](#configuring-the-script)
 
 ***
 
