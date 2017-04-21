@@ -209,7 +209,7 @@ Alternatively:
                 blender
                 ffmpeg
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-2. Linux and other *nix platforms can specifiy a spercific terminal to run script from. Some popular options include the following:
+2. Linux and other *nix platforms can set a specific terminal program to run the script from. Some popular options include the following:
     -  `"gnome-terminal -e"`, `"konsole -e"`, `"xterm -e"`, `"guake -e"`, `"terminator -e"`
         - If no terminal is specified on Linux or *nix systems, the "click_me" fearture (line 112) will run, hidden, in the background.
 
