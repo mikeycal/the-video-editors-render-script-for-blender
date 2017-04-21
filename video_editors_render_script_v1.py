@@ -72,7 +72,7 @@
 #
 #  Link to Video Tutorial:
 #
-#  http: https://www.youtube.com/watch?v=rgwP5L1bICk                                                                         ___________________________________________________________________________
+#  http: https://www.youtube.com/watch?v=rgwP5L1bICk                               ___________________________________________________________________________
 #_______________________________________________________________________________  |__________________________________NOTES MARGIN_____________________________|
 
 #----[ IMPORT PYTHON MODULES ]                                                 #  | This script should work on any Operating System that supports
@@ -1292,7 +1292,18 @@ if blender_image_sequence and blender_audio_codec != "NONE":
 
 #----[ DELETE WORKING DIRECTORY ]
 if auto_delete_temp_files:
-    shutil.rmtree(full_root_filepath + working_dir_temp)
+    try:
+        shutil.rmtree(full_root_filepath + working_dir_temp)
+    except:
+        subprocess.call(clr_cmd, shell=True)
+        print(80 *"#")
+        print(" " + working_dir_temp + " is locked by the Operating System. \
+So it can't be Deleted\n automatically. This happens when a file in the "\
++ working_dir_temp + " is open in\n your file browser or terminal and the \
+script attempts to Delete. This doesn't\n harm the final video render in any \
+way. This script will run normally the next\n time you run it. Just remember \
+to stop viewing the files in the\n " + working_dir_temp + " before the \
+script finishes.")
 
 #_______________________________________________________________________________
 #
