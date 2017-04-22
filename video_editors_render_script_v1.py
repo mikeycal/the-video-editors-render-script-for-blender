@@ -159,7 +159,7 @@ auto_overwrite_files = True #(Default: True) [True or False]
 #--------------------------------------------------------------------#
 
 #----[ FFMPEG COMMAND LINE ARGUMENTS USED TO MUX FINAL VIDEO ]                 #  | e.g.: ffmpeg -i video.mp4 -i FullAudio.m4a [arg1] FinishedVideo.mp4 [arg2]
-post_full_audio= "-c:v copy -c:a copy -map 0:v:0 -map 1:a:0"                   #  | Essential arguments used to Mux Final Audio/Video (! DON'T CHANGE !)
+post_full_audio = "-c:v copy -c:a copy -map 0:v:0 -map 1:a:0"                  #  | Essential arguments used to Mux Final Audio/Video (! DON'T CHANGE !)
 post_full_audio += " -movflags faststart" # [arg1]                             #  | Makes the video streamable for services like YouTube
 post_finished_video = "-async 1" # [arg2]                                      #  | add trailing args here
 
@@ -498,6 +498,29 @@ else:                                                                          #
 
 #_______________________________________________________________________________
 #
+#                           CHECK FOR IMAGE SEQUENCE
+#_______________________________________________________________________________
+
+#----{ DETECT IF USER SELECTED AN IMAGE FORMAT ]
+if blender_file_format in ("BMP","IRIS","PNG","JPEG","JPEG2000","TARGA",\
+    "TARGA_RAW","CINEON","DPX","OPEN_EXR_MULTILAYER","OPEN_EXR","HDR","TIFF"): #  | This renders an Image Sequence and Audio file
+    blender_image_sequence = True                                              #  | to a folder instead of muxing an audio/video file
+else: 
+    blender_image_sequence = False
+
+    #----[ IF IMAGES SEQUENCE IS SET, DON'T ALLOW GIF RENDERING ]              #  | With this script, GIF's can only be produced from movie formats.
+    if render_gif:
+        subprocess.call(clr_cmd, shell=True)
+        print(80 *"#")
+        print("\n\n You have configued this script to render an animated gif \
+and selected an\n Image Sequence format of " + blender_file_format + ". These \
+options are mutually exclusive.\n Either Change to a movie format to render \
+an animated gif, or set\n render_gif = False. \n\n")
+        print(80 * "#")
+        exit()
+
+#_______________________________________________________________________________
+#
 #                                   WARNINGS
 #_______________________________________________________________________________
 
@@ -571,7 +594,7 @@ if blender_use_lossless_output and not blender_image_sequence:
         subprocess.call(clr_cmd, shell=True)
         print(80 * "#")
         print("\n\n You selected a " + blender_video_format + " container to \
-hold lossless video. Please reopen the blend file and change to an 'AVI' \
+hold lossless video. Please reopen the blend\n file and change to an 'AVI' \
 container\n\n")
         print(80 * "#")
         exit()
@@ -637,30 +660,6 @@ if blender_use_autosplit:
 OUTPUT' option \n that is located in the encoding section.\n\n")
     print(80 * "#")
     exit()
-
-#_______________________________________________________________________________
-#
-#                           CHECK FOR IMAGE SEQUENCE
-#_______________________________________________________________________________
-
-#----[ BY DEFAULT, WE ASSUME BLENDER IS RENDERING A MOVIE FORMAT ]
-blender_image_sequence = False
-
-#----{ DETECT IF USER SELECTED AN IMAGE FORMAT ]
-if blender_file_format in ("BMP","IRIS","PNG","JPEG","JPEG2000","TARGA",\
-    "TARGA_RAW","CINEON","DPX","OPEN_EXR_MULTILAYER","OPEN_EXR","HDR","TIFF"): #  | This renders an Image Sequence and Audio file
-    blender_image_sequence = True                                              #  | to a folder instead of muxing an audio/video file
-
-    #----[ IF IMAGES SEQUENCE IS SET, DON'T ALLOW GIF RENDERING ]              #  | With this script, GIF's can only be produced from movie formats.
-    if render_gif:
-        subprocess.call(clr_cmd, shell=True)
-        print(80 *"#")
-        print("\n\n You have configued this script to render an animated gif \
-and selected an\n Image Sequence format of " + blender_file_format + ". These \
-options are mutually exclusive.\n Either Change to a movie format to render \
-an animated gif, or set\n render_gif = False. \n\n")
-        print(80 * "#")
-        exit()
 
 #_______________________________________________________________________________
 #
@@ -947,6 +946,10 @@ if blender_audio_codec != "NONE":
     if blender_audio_codec == "AAC":                                           #  | Make acception for AAC codec
         path_to_compressed_audio += "m4a"                                      #  | Use .m4a extension instead of .aac
         hold_audio_codec = "m4a"                                               #  | We save this for later.
+
+    elif blender_audio_codec == "VORBIS":                                      #  | Vorbis needs to use ogg container
+        path_to_compressed_audio += "ogg"
+
     else:
         hold_audio_codec = blender_audio_codec.lower()                         #  | Used for audio extension of all but aac
         path_to_compressed_audio += blender_audio_codec.lower()
@@ -992,6 +995,9 @@ if blender_audio_codec != "NONE":
     if blender_audio_codec == "AAC":
         if not use_libfdk_acc:
             wav_to_compressed_audio += " -strict experimental"                 #  | strict experimental makes AAC encode work. (Legacy: phased out on builds after 12/5/2015)
+    
+    if blender_audio_codec == "VORBIS":
+        wav_to_compressed_audio += " -strict experimental"                     #  | strict experimental makes VORBIS encode work.
 
     wav_to_compressed_audio += " \"" + path_to_compressed_audio + "\""
 
