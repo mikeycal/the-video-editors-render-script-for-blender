@@ -505,9 +505,6 @@ else:                                                                          #
 if blender_file_format in ("BMP","IRIS","PNG","JPEG","JPEG2000","TARGA",\
     "TARGA_RAW","CINEON","DPX","OPEN_EXR_MULTILAYER","OPEN_EXR","HDR","TIFF"): #  | This renders an Image Sequence and Audio file
     blender_image_sequence = True                                              #  | to a folder instead of muxing an audio/video file
-else: 
-    blender_image_sequence = False
-
     #----[ IF IMAGES SEQUENCE IS SET, DON'T ALLOW GIF RENDERING ]              #  | With this script, GIF's can only be produced from movie formats.
     if render_gif:
         subprocess.call(clr_cmd, shell=True)
@@ -517,7 +514,9 @@ and selected an\n Image Sequence format of " + blender_file_format + ". These \
 options are mutually exclusive.\n Either Change to a movie format to render \
 an animated gif, or set\n render_gif = False. \n\n")
         print(80 * "#")
-        exit()
+        exit()                                                                 
+else: 
+    blender_image_sequence = False
 
 #_______________________________________________________________________________
 #
