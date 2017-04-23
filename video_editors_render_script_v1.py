@@ -169,10 +169,10 @@ export_audio_format = "S16" # (Default: "S16") ["U8","S16","S24","S32","F32","F6
 force_audio_mixrate = "" # (Default: "") ["44100","48000","96000","192000"]    #  | Mixrate (Audio Sample Rate) - 48kHz seems to be default for most recording devices.
                                                                                #  | Leave the force_audio_mixrate = "" to use the Blender's default setting.
 #----[ SHOULD WE USE FFMPEG'S RANGE OF BITRATES? ]
-use_ffmpeg_audio_bitrates = False # (Default: False) [True or False]           #  | True allows audio bitrates from 8kbs to 640kbs (Depending on codec limit)
+use_ffmpeg_audio_bitrates = False # (Default: False) [True or False]           #  | True allows audio bitrates from 8kb/s to 640kb/s (Depending on codec limit)
 
-#----[ WHAT FFMPEG AUDIO BITRATE SHOULD WE TRY TO USE? ]                       #  | Blender locks bitrate from 32kbs-384kbs. We are using external ffmpeg, so
-custom_audio_bitrate = 512 # kbps  [8 - 640]                                   #  | we can override blender's limit. FFmpeg uses closest compatible bitrate.
+#----[ WHAT FFMPEG AUDIO BITRATE SHOULD WE TRY TO USE? ]                       #  | Blender locks bitrate from 32kb/s-384kb/s. We are using external ffmpeg, so
+custom_audio_bitrate = 512 # kb/s  [8 - 640]                                   #  | we can override blender's limit. FFmpeg uses closest compatible bitrate.
 
 #----[ DO YOU WANT TO USE LIBFDK_AAC INSTEAD OF STANDARD ACC ]                 #  | If you built FFMPEG with libfdk_acc, you can use it by setting to True. This feature only works
 use_libfdk_acc = False # (Default: False) [True or False]                      #  | if you have compiled in support for libfdk. It will crash if you set to True and it isn't present.
@@ -310,20 +310,20 @@ relative_path_to_img_sequence = img_sequence_dir + slash
 #----[ PCM MIXDOWN SETTINGS (LOSSLESS) ]
 export_audio_container = "WAV" # (Default: "WAV")
 export_audio_codec = "PCM" # (Default: "PCM")
-export_audio_bitrate = 384 # kbps (Default: 384)                               #  | This setting is ignored by PCM (It's set because it's there.)
+export_audio_bitrate = 384 # kb/s (Default: 384)                               #  | This setting is ignored by PCM (It's set because it's there.)
 export_audio_split_channels = False # (Default: False) [True or False]         #  | Turning this to True may cause loss of some audio
 
 #----[ DOCUMENTED BITRATE RANGE FOR SUPPORTED AUDIO CODECS ]                   #  | Wikipedia was my source for these bitrate limits
-max_audio_bitrate_ac3 = 640 #kbps (AC3)                                        #  | If you know of better settings, email me.
-max_audio_bitrate_aac = 529 # kbps (AAC)
-max_audio_bitrate_mp3 = 320 #kbps (MP3)
-max_audio_bitrate_mp2 = 384 #kbps (MP2)
-min_audio_bitrate_ac3 = min_audio_bitrate_mp2 = 32 #kbps (AC3) (MP2)
-min_audio_bitrate_aac = min_audio_bitrate_mp3 = 8 #kbps (AAC) (MP3)
+max_audio_bitrate_ac3 = 640 #kb/s (AC3)                                        #  | If you know of better settings, email me.
+max_audio_bitrate_aac = 529 # kb/s (AAC)
+max_audio_bitrate_mp3 = 320 #kb/s (MP3)
+max_audio_bitrate_mp2 = 384 #kb/s (MP2)
+min_audio_bitrate_ac3 = min_audio_bitrate_mp2 = 32 #kb/s (AC3) (MP2)
+min_audio_bitrate_aac = min_audio_bitrate_mp3 = 8 #kb/s (AAC) (MP3)
 
 #----[ FALLBACK AUDIO BITRATES ]
-max_audio_bitrate = 320 # kbps
-min_audio_bitrate = 32 # kbps
+max_audio_bitrate = 320 # kb/s
+min_audio_bitrate = 32 # kb/s
 
 #----[ SET OVERWRITING SETTINGS ]
 if auto_overwrite_files:
@@ -679,10 +679,10 @@ OUTPUT' option \n that is located in the encoding section.\n\n")
 
 #_______________________________________________________________________________
 #
-#                             SCRIPT SETTINGS BANNER
+#                             SCRIPT SETTINGS BANNER                           #  | Messy because Blender won't unmark settings, it hides and ignores.
 #_______________________________________________________________________________
 
-#----[ DISPLAY THESE SETTINGS IN THE BANNER BEFORE RENDERING ]
+#----[ DISPLAY THESE SETTINGS IN THE BANNER BEFORE RENDERING ]                 
 if display_script_settings_banner:
     subprocess.call(clr_cmd, shell=True)
     if my_platform == "Windows":
@@ -740,20 +740,30 @@ the first Scene showing. (First Scene is usually named, \"Scene\")\n\n"
         + " - " + str(end_frame_is) + " ]\n"
 
     if not blender_image_sequence:
-        if blender_video_format == "H264":
+        hide_codec = False
+
+        if blender_file_format in ("AVI_JPEG","AVI_RAW"):
+           print_banner += "  VIDEO: [ " + blender_file_format
+           hide_codec = True 
+        elif blender_video_format == "QUICKTIME":
+            print_banner += "  VIDEO: [ MOV"                                   #  | Quicktime Format uses MOV container
+        elif blender_video_format == "H264":
             print_banner += "  VIDEO: [ AVI"                                   #  | H264 Format uses AVI container
         else:
             print_banner += "  VIDEO: [ " + blender_video_format
-
-        if blender_video_codec == "MPEG4":
-            print_banner += " ( DIVX ) ] [ "                                   #  | DIVX oddly reports that it uses MPEG4 codec
-        elif blender_video_format in ("MPEG1","MPEG2","FLASH","XVID", "DV"):
-            print_banner += " ] [ "                                            #  | Remove False Codec Reporting
-        elif blender_video_format == "H264":
-            print_banner += " (H264) ] [ " 
-        else:
-            print_banner += " ( " + blender_video_codec + " ) ] [ "
         
+        if not hide_codec:
+            if blender_video_codec == "MPEG4":
+                print_banner += " ( DIVX ) ] [ "                               #  | DIVX oddly reports that it uses MPEG4 codec
+            elif blender_video_format in ("MPEG1","MPEG2","FLASH","XVID", "DV"):
+                print_banner += " ] [ "                                        #  | Remove False Codec Reporting
+            elif blender_video_format == "H264":
+                print_banner += " (H264) ] [ " 
+            else:
+                print_banner += " ( " + blender_video_codec + " ) ] [ "
+        else:
+            print_banner += " ] [ "                                            #  | This close the AVI_JPEG and AVI_RAW settings
+
         print_banner += str(blender_x_times_res_percent) + " x "\
         + str(blender_y_times_res_percent) + " ]"
         print_banner += " [ " + str(the_framerate_float)\
@@ -763,7 +773,7 @@ the first Scene showing. (First Scene is usually named, \"Scene\")\n\n"
             print_banner += "          [ Lossless ] "
         else:
             print_banner += "          [ Bitrate: "\
-            + str(blender_video_bitrate) + " kbs ] "
+            + str(blender_video_bitrate) + " kb/s ] "
 
         print_banner += "[ Frames: " + str(start_frame_is) + " - "\
         + str(end_frame_is) + " ]\n"
@@ -781,9 +791,9 @@ the first Scene showing. (First Scene is usually named, \"Scene\")\n\n"
         print_banner += " ]"
         if use_ffmpeg_audio_bitrates:
             print_banner += " [ " + str(custom_audio_bitrate)\
-            + " kbs ] ( FFmpeg Custom Bitrate [ ON ] )"
+            + " kb/s ] ( FFmpeg Custom Bitrate [ ON ] )"
         else:
-            print_banner += " [ " + str(blender_audio_bitrate) + " kbs ]"
+            print_banner += " [ " + str(blender_audio_bitrate) + " kb/s ]"
 
         print_banner += " [ VOLUME: "\
         + str(int(round(blender_audio_volume * 100))) + "% ]\n          \
