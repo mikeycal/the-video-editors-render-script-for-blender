@@ -601,12 +601,17 @@ accidentally using 'Lossless Output'\n when you want to use a bitrate setting.\
 
 #----[ CHECK LOSSLESS OUTPUT OPTION AGAINST CONTAINER ]                        #  | When rendering a lossless video codec, AVI is the most compatible Container.
 if blender_use_lossless_output and not blender_image_sequence:
-    if blender_video_format != "AVI":
+    if blender_video_format != "AVI" and blender_video_format != "H264":
         subprocess.call(clr_cmd, shell=True)
         print(80 * "#")
         print("\n\n You selected a " + blender_video_format + " container to \
 hold lossless video. Please reopen the blend\n file and change to an 'AVI' \
-container\n\n")
+container. This warning also happens if you left\n your 'lossless output' \
+checkbox marked. Please open your .blend file, go to\n the encoding \
+section, switch to the 'H264' codec, and uncheck the\n 'Lossless Output' \
+checkbox. Then set your codec of choice. This will prevent\n the script from \
+accidentally using 'Lossless Output' when you want to use a\n bitrate setting.\
+\n\n")
         print(80 * "#")
         exit()
 
@@ -735,8 +740,20 @@ the first Scene showing. (First Scene is usually named, \"Scene\")\n\n"
         + " - " + str(end_frame_is) + " ]\n"
 
     if not blender_image_sequence:
-        print_banner += "  VIDEO: [ " + blender_video_format
-        print_banner += " ( " + blender_video_codec + " ) ] [ "
+        if blender_video_format == "H264":
+            print_banner += "  VIDEO: [ AVI"                                   #  | H264 Format uses AVI container
+        else:
+            print_banner += "  VIDEO: [ " + blender_video_format
+
+        if blender_video_codec == "MPEG4":
+            print_banner += " ( DIVX ) ] [ "                                   #  | DIVX oddly reports that it uses MPEG4 codec
+        elif blender_video_format in ("MPEG1","MPEG2","FLASH","XVID", "DV"):
+            print_banner += " ] [ "                                            #  | Remove False Codec Reporting
+        elif blender_video_format == "H264":
+            print_banner += " (H264) ] [ " 
+        else:
+            print_banner += " ( " + blender_video_codec + " ) ] [ "
+        
         print_banner += str(blender_x_times_res_percent) + " x "\
         + str(blender_y_times_res_percent) + " ]"
         print_banner += " [ " + str(the_framerate_float)\
