@@ -587,6 +587,18 @@ attached to viewport objects\n lose sync when rendering with this script. \
         print(80 * "#")
         exit()
 
+#----[ CHECK IF LOSSLESS VIDEO CHECKBOX IS MARKED WHEN WE DON'T WANT IT ]
+if blender_use_lossless_output and blender_video_codec != 'H264':              #  | Blender leaves the lossless output checkbox set even after switching codecs. 
+    subprocess.call(clr_cmd, shell=True)
+    print(80 * "#")
+    print("\n\n Please open your .blend file, go to the encoding \
+section, switch to the 'H264'\n codec, and uncheck the 'Lossless Output' \
+checkbox. Then set your codec of\n choice. This will prevent the script from \
+accidentally using 'Lossless Output'\n when you want to use a bitrate setting.\
+\n\n")
+    print(80 * "#")
+    exit()
+
 #----[ CHECK LOSSLESS OUTPUT OPTION AGAINST CONTAINER ]                        #  | When rendering a lossless video codec, AVI is the most compatible Container.
 if blender_use_lossless_output and not blender_image_sequence:
     if blender_video_format != "AVI":
@@ -1270,7 +1282,6 @@ subprocess.call(commands_to_execute, shell=True) # run render script in terminal
 #
 #                           MOVE / DELETE MEDIA FILES
 #_______________________________________________________________________________
-
 
 #----[ IF YOU HAVE NO AUDIO, NO NEED TO MUX, JUST MOVE VIDEO UP A DIRECTORY ]
 if blender_audio_codec == "NONE" and not render_gif\
