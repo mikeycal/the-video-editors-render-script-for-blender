@@ -56,10 +56,10 @@
 ## Download a Source Code Editor that supports Python:
 ![Source Code Editor](https://github.com/mikeycal/the-video-editors-render-script-for-blender/blob/master/imgs/syntax_highlight.JPG)
 
-At times you will need to edit this Python Script. So I would advise that you download a free Source Code editor for your platform of choice. Here are my recommendations:
-  - Windows: https://atom.io/ or https://notepad-plus-plus.org/
-  - OSX: https://atom.io/
-  - GNU/Linux: https://atom.io/, gedit, kate
+At times you will need to edit this Python Script. So I would advise that you download a free Source Code editor for your platform of choice. Here are my recommendations (I use Gedit):
+  - Windows: https://atom.io/, https://notepad-plus-plus.org/, https://wiki.gnome.org/Apps/Gedit
+  - OSX: https://atom.io/, https://wiki.gnome.org/Apps/Gedit
+  - GNU/Linux: https://atom.io/, https://wiki.gnome.org/Apps/Gedit, kate
 
 ## Tested and Working:
 - Windows 10 (v1607)[Anniversary Update] and (v1703)[Creators Update]
