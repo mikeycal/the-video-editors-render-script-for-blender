@@ -960,6 +960,7 @@ if blender_audio_codec != "NONE":
 
     elif blender_audio_codec == "VORBIS":                                      #  | Vorbis needs to use ogg container
         path_to_compressed_audio += "ogg"
+        hold_audio_codec = "ogg"                                               #  | We save this for later.
 
     else:
         hold_audio_codec = blender_audio_codec.lower()                         #  | Used for audio extension of all but aac
