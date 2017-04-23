@@ -96,7 +96,7 @@ At times you will need to edit this Python Script. So I would advise that you do
 
 This script assumes that blender is saved to the following default path: "C:\Program Files\Blender Foundation\Blender\blender.exe" this is the default path when you install blender using the *.msi* Installer. You can get that Installer at the following link: https://www.blender.org/download/ If you choose to install Blender in a different place, please set a custom path in this script.
 
-### Running the Script (8 Steps)
+### Running the Script (9 Steps)
 
 1. If necessary, use your source code editor to set the path to FFmpeg and Blender. You need to go to line 97 and 98 in video_editors_render_script.py
 
@@ -122,7 +122,11 @@ This script assumes that blender is saved to the following default path: "C:\Pro
 
 7. After script finishes, you will see a Render time in the Command Prompt. See how much it improved your render time by looking at the final script time.
 
-8. [Goto the "Configuring the Script" Section](#configuring-the-script)
+8. Improve the look of CMD.exe by right clicking on the "Title Bar" of CMD.exe and changing the "Defaults" to the recommended settings:
+
+![CMD.exe Fonts](https://github.com/mikeycal/the-video-editors-render-script-for-blender/blob/master/imgs/cmdfont-size.JPG)
+
+9. [Goto the "Configuring the Script" Section](#configuring-the-script)
 
 ***
 
