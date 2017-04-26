@@ -352,7 +352,7 @@ for scene in bpy.data.scenes:
         blender_x_resolution = scene.render.resolution_x #             (800)
         blender_y_resolution = scene.render.resolution_y #             (600)
         blender_res_percent = scene.render.resolution_percentage #     (50)
-        blender_file_format= scene.render.image_settings.file_format # (XVID)
+        blender_file_format = scene.render.image_settings.file_format # (XVID)
         blender_video_format = scene.render.ffmpeg.format #            (MPEG4)
         blender_video_codec = scene.render.ffmpeg.codec #              (H264)
         blender_video_bitrate = scene.render.ffmpeg.video_bitrate #    (8000)
@@ -501,6 +501,16 @@ else:                                                                          #
 #                           CHECK FOR IMAGE SEQUENCE
 #_______________________________________________________________________________
 
+#----[ CHECK FOR SCENE NAMED "Scene" ]
+if not scene_name_present:
+    subprocess.call(clr_cmd, shell=True)
+    print(80 * "#")
+    print("\n\n ! NO SCENE NAMED \"Scene\" ALERT !\n\n Please name your \
+primary scene, \"Scene\" . This is required so that blender\n knows \
+which scene it should take settings from. \n\n")
+    print(80 * "#")
+    exit()
+
 #----{ DETECT IF USER SELECTED AN IMAGE FORMAT ]
 if blender_file_format in ("BMP","IRIS","PNG","JPEG","JPEG2000","TARGA",\
     "TARGA_RAW","CINEON","DPX","OPEN_EXR_MULTILAYER","OPEN_EXR","HDR","TIFF"): #  | This renders an Image Sequence and Audio file
@@ -522,16 +532,6 @@ else:
 #
 #                                   WARNINGS
 #_______________________________________________________________________________
-
-#----[ CHECK FOR SCENE NAMED "Scene" ]
-if not scene_name_present:
-    subprocess.call(clr_cmd, shell=True)
-    print(80 * "#")
-    print("\n\n ! NO SCENE NAMED \"Scene\" ALERT !\n\n Please name your \
-primary scene, \"Scene\" . This is required so that blender\n knows \
-which scene it should take settings from. \n\n")
-    print(80 * "#")
-    exit()
 
 #----[ MAKE SURE WE HAVE AT LEAST 1 FRAMES PER RENDER INSTANCE ]
 if total_number_of_frames < cores_enabled:
