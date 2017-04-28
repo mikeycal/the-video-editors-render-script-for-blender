@@ -431,14 +431,13 @@ script.\n\n" + 80 * "#")
 
 #----[ CHECK FOR SCENE NAMED "Scene" ]
 if not scene_name_present:                                                     #  | We must have a scene named "Scene" to get settings from.
-    if not scene_name_present:
-        subprocess.call(clr_cmd, shell=True)
-        print(80 * "#")
-        print("\n\n ! NO SCENE NAMED \"Scene\" ALERT !\n\n Please name your \
+    subprocess.call(clr_cmd, shell=True)
+    print(80 * "#")
+    print("\n\n ! NO SCENE NAMED \"Scene\" ALERT !\n\n Please name your \
 primary scene, \"Scene\" . This is required so that blender\n knows \
 which scene it should take settings from. \n\n")
-        print(80 * "#")
-        exit()
+    print(80 * "#")
+    exit()
 
 if sound_strips == 0:                                                          #  | Turn off Audio if there are 0 Sound Strips, otherwise, use 1st detected
     blender_audio_codec = "NONE"                                               #  | Audio Codec
