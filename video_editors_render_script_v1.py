@@ -165,7 +165,7 @@ post_finished_video = "-async 1" # [arg2]                                      #
 
 #----[ BLENDER AUDIO PCM MIXDOWN SETTINGS ]                                    #  | Note: Audio is exported separate from the video, using following settings.
 export_audio_accuracy = 1024 # (Default: 1024)                                 #  | Sample Accuracy - lower it is, the more accurate. (?)
-export_audio_format = "S16" # (Default: "S16") ["U8","S16","S24","S32","F32","F64"] Sample Format: 's16' works on all platforms but try 'S24' or 'S32'
+export_audio_format = "" # (Default: "") ["U8","S16","S24","S32","F32","F64"]  #  | Sample Format: 's16' works on all platforms but try 'S24' or 'S32'
 force_audio_mixrate = "" # (Default: "") ["44100","48000","96000","192000"]    #  | Mixrate (Audio Sample Rate) - 48kHz seems to be default for most recording devices.
                                                                                #  | Leave the force_audio_mixrate = "" to use the Blender's default setting.
 #----[ SHOULD WE USE FFMPEG'S RANGE OF BITRATES? ]
@@ -431,6 +431,18 @@ script.\n\n" + 80 * "#")
 
 if sound_strips == 0:                                                          #  | Turn off Audio if there are 0 Sound Strips, otherwise, use 1st detected
     blender_audio_codec = "NONE"                                               #  | Audio Codec
+
+if blender_audio_codec != "NONE":                                              #  | If we're rendering audio, we can collect the Sample Format setting from User Pref.
+    pref_sample_format = bpy.context.user_preferences.system.audio_sample_format
+    if pref_sample_format in ("U8","S16","S24","S32"):
+        if export_audio_format == "":
+            export_audio_format = pref_sample_format
+    elif pref_sample_format == "FLOAT":
+        if export_audio_format =="":
+            export_audio_format = "F32"
+    elif pref_sample_format == "DOUBLE":
+        if export_audio_format =="":
+            export_audio_format = "F64"
 
 #_______________________________________________________________________________
 #
