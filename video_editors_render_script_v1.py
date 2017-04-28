@@ -1175,7 +1175,7 @@ if my_platform == "Windows":                                                   #
 #==============================================================================#
 
 if blender_image_sequence:
-    full_command_string = blender_command
+    full_command_string = blender_command + wait_here 
 #_______________________________________________________________________________
 #
 #                              VIDEO CONCATENATION
