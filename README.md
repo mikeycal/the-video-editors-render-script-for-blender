@@ -98,7 +98,7 @@ This script assumes that blender is saved to the following default path: "C:\Pro
 
 ### Running the Script (9 Steps)
 
-1. If necessary, use your source code editor to set the path to FFmpeg and Blender. You need to go to line 97 and 98 in video_editors_render_script.py
+1. If necessary, use your source code editor to set the path to FFmpeg and Blender. You need to go to line 97 and 98 in video_editors_render_script_v1.py
 
  By default Line 97 and 98 are set to the following paths:
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -113,7 +113,7 @@ This script assumes that blender is saved to the following default path: "C:\Pro
 4. Run this script from the same folder using cmd.exe:
 (use the quotation marks for paths with spaces)
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-`"C:\Program Files\Blender Foundation\Blender\blender.exe" -b 1.blend -P video_editors_render_script.py`
+`"C:\Program Files\Blender Foundation\Blender\blender.exe" -b 1.blend -P video_editors_render_script_v1.py`
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 5. The script will create a clickable executable, in the same directory, that you can use for all future renders.
  (Windows_Click_to_Render.bat)
@@ -148,7 +148,7 @@ official link that is pointed to from ffmpeg.org: http://ffmpeg.org/download.htm
 
 ### Running the Script (7 Steps)
 
-1. If necessary, use your source code editor to set the path to FFmpeg and Blender. You need to go to line 103 and 104 in video_editors_render_script.py
+1. If necessary, use your source code editor to set the path to FFmpeg and Blender. You need to go to line 103 and 104 in video_editors_render_script_v1.py
 
  By default Line 103 and 104 are set to the following paths:
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -162,7 +162,7 @@ official link that is pointed to from ffmpeg.org: http://ffmpeg.org/download.htm
 
 4. Run this Script from the same folder using Terminal: 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-`/Applications/Blender/blender.app/Contents/MacOS/blender -b 1.blend -P video_editors_render_script.py`
+`/Applications/Blender/blender.app/Contents/MacOS/blender -b 1.blend -P video_editors_render_script_v1.py`
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 5. The script will create a clickable executable, in the same directory, that you can use for all future renders. (OSX_Click_to_Render.command)
 
@@ -205,7 +205,7 @@ Alternatively:
 
 ### Running the Script (9 Steps)
 
-1. If necessary, use your source code editor to set the path to FFmpeg and Blender. You need to go to line 109 and 110 in video_editors_render_script.py
+1. If necessary, use your source code editor to set the path to FFmpeg and Blender. You need to go to line 109 and 110 in video_editors_render_script_v1.py
 
  By default Line 109 and 110 are set to the following paths:
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -223,7 +223,7 @@ Alternatively:
 
 5. Run this script from the same folder using the Terminal:
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-`blender -b 1.blend -P video_editors_render_script.py`
+`blender -b 1.blend -P video_editors_render_script_v1.py`
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 6. The script will create a clickable executable, in the same directory, that you can use for all future renders. (Linux_Click_to_Render.sh)
 
@@ -265,10 +265,10 @@ The first time that you render with this script, you will need to run the follow
 
 - `cd c:\Users\mikeycal\Video` (Change to the directory with this script and 1.blend file.)
 
-- `"c:\PATH\ TO\ blender" -b 1.blend -P video_editors_render_script.py` (Use Quotes with Spaces)
+- `"c:\PATH\ TO\ blender" -b 1.blend -P video_editors_render_script_v1.py` (Use Quotes with Spaces)
 
 - - - - - - - 
-This script will automatically generate a "clickable" render file that you can use for all future renders. After you have run the script 1 time, you can move the "Click_to_Render" file and "video_editors_render_script.py" file to any folder you like, it will render any project named 1.blend from any folder you place those 2 files in.
+This script will automatically generate a "clickable" render file that you can use for all future renders. After you have run the script 1 time, you can move the "Click_to_Render" file and "video_editors_render_script_v1.py" file to any folder you like, it will render any project named 1.blend from any folder you place those 2 files in.
  
 **Windows:** `Windows_Click_to_Render.bat`
 
