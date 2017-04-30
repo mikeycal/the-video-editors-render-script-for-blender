@@ -358,6 +358,7 @@ for scene in bpy.data.scenes:
         blender_video_bitrate = scene.render.ffmpeg.video_bitrate #    (8000)
         blender_gop = scene.render.ffmpeg.gopsize #                    (18)
         blender_use_lossless_output = scene.render.ffmpeg.use_lossless_output
+        blender_color_mode = scene.render.image_settings.color_mode#   (RGB)
         #Scale resolution
         blender_x_times_res_percent =\
         int((blender_res_percent * 0.01)*blender_x_resolution) #       (400)   #  | These settings allow us to use the "scale resolution"
@@ -749,7 +750,8 @@ the first Scene showing. (First Scene is usually named, \"Scene\")\n\n"
 
         print_banner += " [ " + str(the_framerate_float) + " FPS ]\n"
         print_banner += "                   [ Frames: " + str(start_frame_is)\
-        + " - " + str(end_frame_is) + " ]\n"
+        + " - " + str(end_frame_is) + " ]" + " [ Color Mode: "\
+        + blender_color_mode + " ]\n"
 
     if not blender_image_sequence:
         hide_codec = False
@@ -788,7 +790,8 @@ the first Scene showing. (First Scene is usually named, \"Scene\")\n\n"
             + str(blender_video_bitrate) + " kb/s ] "
 
         print_banner += "[ Frames: " + str(start_frame_is) + " - "\
-        + str(end_frame_is) + " ]\n"
+        + str(end_frame_is) + " ]" + " [ Color Mode: "\
+        + blender_color_mode + " ]\n"
 
     if render_gif:
         print_banner += "\n  GIF RENDER is [ ON ]\n ([ "\
