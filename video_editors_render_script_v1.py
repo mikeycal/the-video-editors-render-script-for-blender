@@ -1,4 +1,4 @@
-########################### BEGIN GPL LICENSE BLOCK ############################
+########################### BEGIN GPL LICENSE BLOCK ###########################
 #
 #     THE VIDEO EDITOR'S RENDER SCRIPT FOR BLENDER
 #     Copyright (C) 2017 Mike Meyers 
@@ -17,39 +17,39 @@
 #     along with this program; if not, write to the Free Software Foundation,
 #     Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 #
-############################ END GPL LICENSE BLOCK #############################
+############################ END GPL LICENSE BLOCK ############################
 
-#____________________________<[ SUPPORT \ CONTACT ]>____________________________
+#____________________________<[ SUPPORT \ CONTACT ]>___________________________
 #
-#                  Programmed by Mike "Mikeycal" Meyers
-#                   Website: http://www.mikeycal.com
-#   Blender Video Editing Tutorials: https://www.youtube.com/user/MikeycalDOTcom
-#   Support Email [Paypal Donations Email] : mikeycaldotcom@yahoo.com
-#_______________________________________________________________________________
+#                Programmed by Mike "Mikeycal" Meyers
+#                 Website: http://www.mikeycal.com
+# Blender Video Editing Tutorials: https://www.youtube.com/user/MikeycalDOTcom
+# Support Email [Paypal Donations Email] : mikeycaldotcom@yahoo.com
+#______________________________________________________________________________
 
-#_____________________________<[ SPECIAL THANKS ]>______________________________
+#_____________________________<[ SPECIAL THANKS ]>_____________________________
 #
 # [ Multiple background Blender instances ]
-#  Thanks to Isti115's instructions on "How to make vse render faster"
-#  http://blender.stackexchange.com/questions/7738/how-to-make-vse-render-faster
+#  Thanks to Isti115's info on "How to make vse render faster"
+#  blender.stackexchange.com/questions/7738/how-to-make-vse-render-faster
 #
 # [ Animated GIF ]
-#  Thanks to ubitux's instructions on how to generate animated GIFS with ffmpeg
+#  Thanks to ubitux's info on how to generate animated GIFS with ffmpeg
 #  http://blog.pkh.me/p/21-high-quality-gif-with-ffmpeg.html
 #
 # [ Viewers like You ]
-#  Thanks to viewers like you that have watched my video editing series, given
-#  me good advice, and brightened my day with your kind words and donations
-#_______________________________________________________________________________
+#  Thanks to viewers like you that have watched my series, given me good
+#  advice, and brightened my day with your kind words and donations
+#______________________________________________________________________________
 
-#______________________________<[ INSTRUCTIONS ]>_______________________________
+#______________________________<[ INSTRUCTIONS ]>______________________________
 #
 # (1) SET THE PATH TO THE BLENDER AND FFMPEG PROGRAMS:
 #
-#  Windows: GOTO line 97,98 | OSX: GOTO line 103,104 | Linux: GOTO line 109,110
+#  Set full paths for Blender and FFMPEG in the section starting on line 93
 #
 # RECOMMENDED PATHS FOR PROGRAMS (Set By Default):
-#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #       Windows: "C:\Program Files\Blender Foundation\Blender\blender.exe"
 #                 C:\ffmpeg\bin\ffmpeg.exe
 #
@@ -58,9 +58,9 @@
 #
 #     GNU/Linux: (Install from repository, and call programs directly):
 #                blender, ffmpeg
-#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #
-# (2) PUT SCRIPT IN ANY FOLDER AND "SAVE AS..." 1.blend FILE TO THE SAME FOLDER
+# (2) PUT SCRIPT IN A FOLDER AND "SAVE AS..." 1.blend FILE TO SAME FOLDER
 #
 # (3) RUN THIS SCRIPT FROM THE FOLDER USING CMD.EXE OR TERMINAL:
 #              (use the quotation marks for paths with spaces)
@@ -68,12 +68,12 @@
 #
 #  Link to Detailed Instructions:
 #
-#  http: https://github.com/mikeycal/the-video-editors-render-script-for-blender/
+#  Github Project Link: https://goo.gl/p8ScAl
 #
 #  Link to Video Tutorial:
 #
 #  http: https://www.youtube.com/watch?v=rgwP5L1bICk                               ___________________________________________________________________________
-#_______________________________________________________________________________  |__________________________________NOTES MARGIN_____________________________|
+#______________________________________________________________________________#  |__________________________________NOTES MARGIN_____________________________|
 
 #----[ IMPORT PYTHON MODULES ]                                                 #  | This script should work on any Operating System that supports
 import platform                                                                #  | Bash Shell, Blender and FFmpeg. You can add your own "elif:"
@@ -88,51 +88,51 @@ import subprocess
 #----[ DETECT OPERATING SYSTEM ]
 my_platform = platform.system()
 
-#_______________________________________________________________________________
+#______________________________________________________________________________
 #
-#>> > > ENTER FULL PATH TO BLENDER AND FFMPEG FOR YOUR OPERATING SYSTEM  < < <<   |  OS Specific Shortcuts like ~ (tilde) don't work - enter full path.
-#_______________________________________________________________________________
+#>> > > ENTER FULL PATH TO BLENDER AND FFMPEG FOR YOUR OPERATING SYSTEM  < < <<#  |  OS Specific Shortcuts like ~ (tilde) don't work - enter full path.
+#______________________________________________________________________________
 
 if my_platform == "Windows": #SET MICROSOFT WINDOWS PATHS BELOW
-    path_to_blender = r"C:\Program Files\Blender Foundation\Blender\blender.exe"# | (leave "r" prefix) python doesn't like \ slashes
+    blender_path = r"C:\Program Files\Blender Foundation\Blender\blender.exe"  #  | (leave "r" prefix) python doesn't like \ slashes
     path_to_ffmpeg = r"C:\ffmpeg\bin\ffmpeg.exe"                               #  | (leave "r" prefix) python doesn't like \ slashes
     assumed_blend_filename = "1.blend"                                         #  | Save as... "1.blend" (Script looks for 1.blend file in script directory.)
     click_me = "Windows_Click_to_Render.bat"                                   #  | Created Clickable Render File
 
 elif my_platform == "Darwin": # APPLE OSX PATHS BELOW
-    path_to_blender = "/Applications/Blender/blender.app/Contents/MacOS/blender"
+    blender_path = "/Applications/Blender/blender.app/Contents/MacOS/blender"
     path_to_ffmpeg = "/Applications/ffmpeg"
     assumed_blend_filename = "1.blend"                                         #  |  Save as... "1.blend" (Script looks for 1.blend file in script directory.)
     click_me = "OSX_Click_to_Render.command"                                   #  |  Created Clickable Render File
 
 elif my_platform == "Linux": # GNU/LINUX PATHS BELOW
-    path_to_blender = "blender"                                                #  |  Set to path of blender
+    blender_path = "blender"                                                   #  |  Set to path of blender
     path_to_ffmpeg = "ffmpeg"                                                  #  |  Set to path of ffmpeg
     assumed_blend_filename = "1.blend"                                         #  |  Save as... "1.blend" (Script looks for 1.blend file in directory.)
     click_me = "Linux_Click_to_Render.sh"                                      #  |  Created Clickable Render File
     terminal_cmd = "gnome-terminal -e"                                         #  |  Terminals: gnome-terminal -e, konsole -e, xterm -e, guake -e, terminator -e
 
 else: # OTHER OPERATING SYSTEMS PATHS BELOW
-    path_to_blender = "blender"
+    blender_path = "blender"
     path_to_ffmpeg = "ffmpeg"
     assumed_blend_filename = "1.blend"                                         #  |  Save as... "1.blend" (Script looks for 1.blend file in script directory.)
     click_me = "Click_to_Render.sh"                                            #  |  Created Clickable Render File
     terminal_cmd = "gnome-terminal -e"                                         #  |  Terminals: gnome-terminal -e, konsole -e, xterm -e, guake -e, terminator -e
 
-#_______________________________________________________________________________
+#______________________________________________________________________________
 #
 #                            USER PREFERRED SETTINGS
-#_______________________________________________________________________________
+#______________________________________________________________________________
 
 #--------------------------------------------------------------------#
-#----------------------[ SCRIPT SETTINGS BANNER ]--------------------#----------
+#----------------------[ SCRIPT SETTINGS BANNER ]--------------------#---------
 #--------------------------------------------------------------------#
 
 display_script_settings_banner = True #(Default: True) [True or False]
 banner_wait_time = 15 # seconds (Default: 15)                                  #  | Number of seconds the script will display render settings before rendering starts.
 
 #--------------------------------------------------------------------#
-#---------------------------[ CPU SETTINGS ]-------------------------#----------
+#---------------------------[ CPU SETTINGS ]-------------------------#---------
 #--------------------------------------------------------------------#
 
 #----[ NUMBER OF LOGICAL CPU CORES RESERVED TO RUN OPERATING SYSTEM ]          #  | I use a setting of 0 without any issues (I have a Intel i5 3570K w/ 16GB RAM)
@@ -145,7 +145,7 @@ force_one_instance_render = False # (Default: False) [True or False]           #
 bypass_low_cpu_warnings = False # (Default: False) [True or False]             #  | True will hide warning prompts and auto-select script recommended settings.
 
 #--------------------------------------------------------------------#
-#--------------------------[ FILE SETTINGS ]-------------------------#----------
+#--------------------------[ FILE SETTINGS ]-------------------------#---------
 #--------------------------------------------------------------------#
 
 #----[ SHOULD WE AUTO-DELETE GENERATED TEMP FOLDERS AND TEMP FILES? ]
@@ -155,7 +155,7 @@ auto_delete_temp_files = True #(Default: True) [True or False]
 auto_overwrite_files = True #(Default: True) [True or False]
 
 #--------------------------------------------------------------------#
-#----------------------[ AUDIO/VIDEO SETTINGS ]----------------------#----------
+#----------------------[ AUDIO/VIDEO SETTINGS ]----------------------#---------
 #--------------------------------------------------------------------#
 
 #----[ FFMPEG COMMAND LINE ARGUMENTS USED TO MUX FINAL VIDEO ]                 #  | e.g.: ffmpeg -i video.mp4 -i FullAudio.m4a [arg1] FinishedVideo.mp4 [arg2]
@@ -178,7 +178,7 @@ custom_audio_bitrate = 512 # kb/s  [8 - 640]                                   #
 use_libfdk_acc = False # (Default: False) [True or False]                      #  | if you have compiled in support for libfdk. It will crash if you set to True and it isn't present.
 
 #--------------------------------------------------------------------#
-#---------------------------[ GIF FEATURES ]-------------------------#----------
+#---------------------------[ GIF FEATURES ]-------------------------#---------
 #--------------------------------------------------------------------#
 
 #----[ SHOULD WE CONVERT VIDEO TO AN ANIMATED GIF? ]                           #  | You must render a Movie format (e.g. mp4,avi,...) to create animated GIFs
@@ -190,7 +190,7 @@ dither_options = "none" # (Default: "none")                                    #
                                                                                #  | "bayer:bayer_scale=3", "floyd_steinberg", "sierra2", "sierra2_4a", "heckbert"
                                                                                #  | See http://blog.pkh.me/p/21-high-quality-gif-with-ffmpeg.html for help
 #--------------------------------------------------------------------#
-#------------------------[ RENDER OVERRIDES ]------------------------#----------
+#------------------------[ RENDER OVERRIDES ]------------------------#---------
 #--------------------------------------------------------------------#
 
 #----[ SHOULD WE BYPASS ALERTS IF ENCODE WILL BE LONGER THAN USUAL? ]
@@ -200,8 +200,8 @@ bypass_huffyuv_and_raw_avi_warnings = False #(Default: False ) [True or False] #
 permit_scene_strips = False #(Default: False) [True or False]                  #  | that have keyframed viewport objects. Instead, Render out keyframed
                                                                                #  | objects as an image sequence, import them into VSE, then use this script.
   #------------------------------------------------------------------#
-#>#-----------------[ .BLEND OVERRIDE FILE CONTENTS ]----------------#----------  | This is a great place to put common settings that you somtimes forget
-  #------------------------------------------------------------------#            | to set in your blend files. These settings are altered right before
+#>#-----------------[ .BLEND OVERRIDE FILE CONTENTS ]----------------#---------#  | This is a great place to put common settings that you somtimes forget
+  #------------------------------------------------------------------#         #  | to set in your blend files. These settings are altered right before
 #>>>> START OF .BLEND OVERRIDE FILE SETTINGS <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<#  | the render begins.
 blendfile_override_setting = "import bpy\n"                                    #
 blendfile_override_setting += "for scene in bpy.data.scenes: \n"               #
@@ -223,10 +223,10 @@ blendfile_override_setting += "    scene.render.ffmpeg.audio_codec = 'NONE'\n" #
 
 #----[ GET NAME OF THIS SCRIPT ]
 name_of_script = os.path.basename(__file__)
-#_______________________________________________________________________________
+#______________________________________________________________________________
 #
 #                        OPERATING SYSTEM SPECIFIC SETTINGS
-#_______________________________________________________________________________
+#______________________________________________________________________________
 
 if my_platform == "Windows": # Windows 10
     slash = "\\"                                                               #  | Operating system slash direction
@@ -273,10 +273,10 @@ else: # OTHER OPERATING SYSTEMS WITH ACCESS TO BASH SHELL
     end_line = ";"
     make_script_executable = "chmod a+x"                                       #  | We need to make the file executable
 
-#_______________________________________________________________________________
+#______________________________________________________________________________
 #
 #                              BASIC CONFIGURATION
-#_______________________________________________________________________________
+#______________________________________________________________________________
 
 #----[ FIND THE PATH TO THIS SCRIPT ]
 full_root_filepath = os.path.dirname(bpy.data.filepath) + slash
@@ -302,7 +302,7 @@ blendfile_override_setting_filename = "OverrideSettings.py"
 
 #----[ SET SCRIPT DEFAULTS VARIABLES ]
 blender_command = full_command_string = "" # (Default= "")
-relative_path_to_av_source = working_dir_temp + slash + av_src_dir + slash
+rel_path_to_av_source = working_dir_temp + slash + av_src_dir + slash
 relative_path_to_other_files = working_dir_temp + slash + other_files_dir\
 + slash
 relative_path_to_img_sequence = img_sequence_dir + slash
@@ -331,10 +331,10 @@ if auto_overwrite_files:
 else:
     can_we_overwrite = ""
 
-#_______________________________________________________________________________
+#______________________________________________________________________________
 #
 #               GET RENDER PROPERTY SETTINGS FROM THE .BLEND FILE
-#_______________________________________________________________________________
+#______________________________________________________________________________
 
 # Set Defaults for Variables that are used below
 number_of_scenes = 0                                                           #  | Set Scene number to 0 so we can count number of VSE scenes.
@@ -353,7 +353,7 @@ for scene in bpy.data.scenes:
         blender_y_resolution = scene.render.resolution_y #             (600)
         blender_res_percent = scene.render.resolution_percentage #     (50)
         blender_file_format = scene.render.image_settings.file_format # (XVID)
-        blender_video_format = scene.render.ffmpeg.format #            (MPEG4)
+        blender_vid_format = scene.render.ffmpeg.format #            (MPEG4)
         blender_video_codec = scene.render.ffmpeg.codec #              (H264)
         blender_video_bitrate = scene.render.ffmpeg.video_bitrate #    (8000)
         blender_gop = scene.render.ffmpeg.gopsize #                    (18)
@@ -381,7 +381,7 @@ for scene in bpy.data.scenes:
         if force_audio_mixrate in ("44100","48000","96000","192000"):
             blender_audio_mixrate = int(force_audio_mixrate)
             #Set the audio sample rate to script's user setting
-            scene.render.ffmpeg.audio_mixrate = int(force_audio_mixrate)      #  | We set the mixrate directly because it's not included in the export function.
+            scene.render.ffmpeg.audio_mixrate = int(force_audio_mixrate)       #  | We set the mixrate directly because it's not included in the export function.
         elif force_audio_mixrate != "":
             subprocess.call(clr_cmd, shell=True)
             print(80 * "#" + "\n\n force_audio_mixrate is set wrong in this \
@@ -404,7 +404,7 @@ script.\n\n" + 80 * "#")
         start_frame_is = scene.frame_start #                            (1)
         end_frame_is = scene.frame_end #                                (1000)
         total_number_of_frames = end_frame_is - start_frame_is #        (999)
-        total_number_of_frames += 1 #                                   (1000)    | We need to add 1 because the first frame is included
+        total_number_of_frames += 1 #                                   (1000) #  | We need to add 1 because the first frame is included
 
         #Render Engine                                (eg)
         blender_render_engine = scene.render.engine # (CYCLES)
@@ -444,21 +444,21 @@ if sound_strips == 0:                                                          #
     blender_audio_codec = "NONE"                                               #  | Audio Codec
 
 if blender_audio_codec != "NONE":                                              #  | If we're rendering audio, we can collect the Sample Format setting from User Pref.
-    pref_sample_format = bpy.context.user_preferences.system.audio_sample_format
-    if pref_sample_format in ("U8","S16","S24","S32"):
+    try_sample_format = bpy.context.user_preferences.system.audio_sample_format
+    if try_sample_format in ("U8","S16","S24","S32"):
         if export_audio_format == "":
-            export_audio_format = pref_sample_format
-    elif pref_sample_format == "FLOAT":
+            export_audio_format = try_sample_format
+    elif try_sample_format == "FLOAT":
         if export_audio_format =="":
             export_audio_format = "F32"
-    elif pref_sample_format == "DOUBLE":
+    elif try_sample_format == "DOUBLE":
         if export_audio_format =="":
             export_audio_format = "F64"
 
-#_______________________________________________________________________________
+#______________________________________________________________________________
 #
 #                      CHECK FOR MINIMUM CPU REQUIREMENTS
-#_______________________________________________________________________________
+#______________________________________________________________________________
 
 #----[ DETECT NUMBER OF LOGICAL CPU CORES AVAILABLE ]                          #  | cpu_count = max number of possible render instances.
 logical_cores_available = multiprocessing.cpu_count()                          #  | Having more instances than count number has NO render time advantage.
@@ -488,8 +488,8 @@ exited.\n\n")
         subprocess.call(clr_cmd, shell=True)                                   #  | Lowest CPU logical core count for this script must be 2
         try:
             min_cores_met = int(input(80 * "#" + "\n\n \
-Your computer is using less than 2 CPU cores.\n\n There will only be a, render \
-time, performance increase if you use ALL\n of your CPU Cores. This should \
+Your computer is using less than 2 CPU cores.\n\n There will only be a, render\
+ time, performance increase if you use ALL\n of your CPU Cores. This should \
 work, but it may cause interaction with\n your computer to slow down.\n \
 To run script with single core, set force_one_instance_render = True \n\n"\
 + 80 * "#" + "\n\n [Enter 2] to use 2 CPU cores, or simply press \
@@ -519,10 +519,10 @@ else:                                                                          #
     cores_enabled = 1                                                          #  | external FFmpeg with 1 core with any .blend project.
     permit_scene_strips = True                                                 #  | 3D Scene Strips work as expected with 1 instance
 
-#_______________________________________________________________________________
+#______________________________________________________________________________
 #
 #                           CHECK FOR IMAGE SEQUENCE
-#_______________________________________________________________________________
+#______________________________________________________________________________
 
 #----{ DETECT IF USER SELECTED AN IMAGE FORMAT ]
 if blender_file_format in ("BMP","IRIS","PNG","JPEG","JPEG2000","TARGA",\
@@ -541,16 +541,16 @@ an animated gif, or set\n render_gif = False. \n\n")
 else: 
     blender_image_sequence = False
 
-#_______________________________________________________________________________
+#______________________________________________________________________________
 #
 #                                   WARNINGS
-#_______________________________________________________________________________
+#______________________________________________________________________________
 
 #----[ MAKE SURE WE HAVE AT LEAST 1 FRAMES PER RENDER INSTANCE ]
 if total_number_of_frames < cores_enabled:
     subprocess.call(clr_cmd, shell=True)
     print(80 * "#")
-    print("\n\n ! NOT ENOUGH FRAMES ALERT !\n\n You must render at least [ " + \
+    print("\n\n ! NOT ENOUGH FRAMES ALERT !\n\n You must render at least [ " +\
     str(cores_enabled) + " ] frames\n\n")
     print(80 * "#")
     exit()
@@ -573,8 +573,8 @@ if blender_x_times_res_percent % 2 != 0\
 or blender_y_times_res_percent % 2 != 0:
     subprocess.call(clr_cmd, shell=True)
     print(80 * "#")
-    print("\n\n Your resolution is not Divisible by 2. Blender can only \
-render resolutions\n that are divisible by 2 with no remainder. Your resolution is "\
+    print("\n\n Your resolution isn't Divisible by 2. Blender can only render \
+X & Y valuse\n that are divisible by 2 with no remainder. Your resolution is "\
     + str(blender_x_times_res_percent) + " x "\
     + str(blender_y_times_res_percent) + " \n\n")
     print(80 * "#")
@@ -614,10 +614,10 @@ accidentally using 'Lossless Output'\n when you want to use a bitrate setting.\
 
 #----[ CHECK LOSSLESS OUTPUT OPTION AGAINST CONTAINER ]                        #  | When rendering a lossless video codec, AVI is the most compatible Container.
 if blender_use_lossless_output and not blender_image_sequence:
-    if blender_video_format != "AVI" and blender_video_format != "H264":
+    if blender_vid_format != "AVI" and blender_vid_format != "H264":
         subprocess.call(clr_cmd, shell=True)
         print(80 * "#")
-        print("\n\n You selected a " + blender_video_format + " container to \
+        print("\n\n You selected a " + blender_vid_format + " container to \
 hold lossless video. Please reopen the blend\n file and change to an 'AVI' \
 container. This warning also happens if you left\n your 'lossless output' \
 checkbox marked. Please open your .blend file, go to\n the encoding \
@@ -659,8 +659,8 @@ CONTINUE ANYWAY or Press [ENTER/RETURN] to Quit: "))
             should_we_continue = int(input(80 * "#" + "\n\n "\
             + blender_video_codec + " will render at about the same speed as \
 the stardard Blender Interface.\n This is due to a long stream mapping time. \
-Use AVI(H264) [Lossless] codec\n instead by opening blender and saving the new \
-setting.\n\n ( Hide Future Warnings by setting \
+Use AVI(H264) [Lossless] codec\n instead by opening blender and saving the new\
+ setting.\n\n ( Hide Future Warnings by setting \
 bypass_huffyuv_and_raw_avi_warnings = True ) \n\n" + 80 * "#" +"\n\n Press \
 [1] to CONTINUE ANYWAY or Press [ENTER/RETURN] to Quit: "))
         except ValueError:
@@ -690,10 +690,10 @@ OUTPUT' option \n that is located in the encoding section.\n\n")
     print(80 * "#")
     exit()
 
-#_______________________________________________________________________________
+#______________________________________________________________________________
 #
 #                             SCRIPT SETTINGS BANNER                           #  | Messy because Blender won't unmark settings, it hides and ignores.
-#_______________________________________________________________________________
+#______________________________________________________________________________
 
 #----[ DISPLAY THESE SETTINGS IN THE BANNER BEFORE RENDERING ]                 
 if display_script_settings_banner:
@@ -759,19 +759,19 @@ the first Scene showing. (First Scene is usually named, \"Scene\")\n\n"
         if blender_file_format in ("AVI_JPEG","AVI_RAW"):
            print_banner += "  VIDEO: [ " + blender_file_format
            hide_codec = True 
-        elif blender_video_format == "QUICKTIME":
+        elif blender_vid_format == "QUICKTIME":
             print_banner += "  VIDEO: [ MOV"                                   #  | Quicktime Format uses MOV container
-        elif blender_video_format == "H264":
+        elif blender_vid_format == "H264":
             print_banner += "  VIDEO: [ AVI"                                   #  | H264 Format uses AVI container
         else:
-            print_banner += "  VIDEO: [ " + blender_video_format
+            print_banner += "  VIDEO: [ " + blender_vid_format
         
         if not hide_codec:
             if blender_video_codec == "MPEG4":
                 print_banner += " ( DIVX ) ] [ "                               #  | DIVX oddly reports that it uses MPEG4 codec
-            elif blender_video_format in ("MPEG1","MPEG2","FLASH","XVID", "DV"):
+            elif blender_vid_format in ("MPEG1","MPEG2","FLASH","XVID", "DV"):
                 print_banner += " ] [ "                                        #  | Remove False Codec Reporting
-            elif blender_video_format == "H264":
+            elif blender_vid_format == "H264":
                 print_banner += " (H264) ] [ " 
             else:
                 print_banner += " ( " + blender_video_codec + " ) ] [ "
@@ -831,10 +831,10 @@ the first Scene showing. (First Scene is usually named, \"Scene\")\n\n"
         time.sleep(1)
         banner_wait_time -= 1
 
-#_______________________________________________________________________________
+#______________________________________________________________________________
 #
 #                           CREATE FILES AND FOLDERS
-#_______________________________________________________________________________
+#______________________________________________________________________________
 
 #----[ CREATE FOLDERS TO STORE GENERATED TEMP FILES ]
 
@@ -851,7 +851,7 @@ if not os.path.exists(full_root_filepath + working_dir_temp + slash\
 
 with open(full_root_filepath + click_me, "w+") as f:
     if my_platform == "Windows":
-        f.write("echo off\n" + "\"" + path_to_blender + "\""\
+        f.write("echo off\n" + "\"" + blender_path + "\""\
         + " -b " + assumed_blend_filename + " -P " + name_of_script)
 
     elif my_platform =="Darwin":
@@ -860,7 +860,7 @@ with open(full_root_filepath + click_me, "w+") as f:
         + 'echo "Error getting script directory" >&2\n'\
         + 'exit 1\n'\
         + '}\n'
-        + "\"" + path_to_blender + "\"" + " -b "\
+        + "\"" + blender_path + "\"" + " -b "\
         + assumed_blend_filename + " -P " + name_of_script)
 
     elif my_platform == "Linux":
@@ -869,11 +869,11 @@ with open(full_root_filepath + click_me, "w+") as f:
         + 'echo "Error getting script directory" >&2\n'\
         + 'exit 1\n'\
         + '}\n'
-        + terminal_cmd + " \"bash -c '" + "\"" + path_to_blender + "\""\
+        + terminal_cmd + " \"bash -c '" + "\"" + blender_path + "\""\
         + " -b " + assumed_blend_filename + " -P " + name_of_script + "; \
 exec /bin/bash -i'\"\n\n" + "###############  ENABLE CLICKABLE / EXECUTABLE \
-SCRIPTS  ###############\n# If this script opened in a text editor rather than \
-executing\n# inside a terminal window, it's because your file browser needs\n\
+SCRIPTS  ###############\n# If this script opened in a text editor rather than\
+ executing\n# inside a terminal window, it's because your file browser needs\n\
 # to be set to allow executing scripts. In File Browsers like\n\
 # Nautilus, you can find this setting in the Preferences->Behavior Tab")
 
@@ -883,11 +883,11 @@ executing\n# inside a terminal window, it's because your file browser needs\n\
         + 'echo "Error getting script directory" >&2\n'\
         + 'exit 1\n'\
         + '}\n'
-        + terminal_cmd + " \"bash -c '" + "\"" + path_to_blender + "\""\
+        + terminal_cmd + " \"bash -c '" + "\"" + blender_path + "\""\
         + " -b " + assumed_blend_filename + " -P " + name_of_script + "; \
 exec /bin/bash -i'\"\n\n" + "###############  ENABLE CLICKABLE / EXECUTABLE \
-SCRIPTS  ###############\n# If this script opened in a text editor rather than \
-executing\n# inside a terminal window, it's because your file browser needs\n\
+SCRIPTS  ###############\n# If this script opened in a text editor rather than\
+ executing\n# inside a terminal window, it's because your file browser needs\n\
 # to be set to allow executing scripts. In File Browsers like\n\
 # Nautilus, you can find this setting in the Preferences->Behavior Tab")
 
@@ -934,7 +934,7 @@ if blender_audio_codec != "NONE":
         user_wants_to_convert_audio = True
 
     #----[ SET PATH TO THE PRIMARY EXPORTED AUDIO FILE: WAV(PCM) ]
-    path_to_wav = full_root_filepath + relative_path_to_av_source + wav_filename
+    path_to_wav = full_root_filepath + rel_path_to_av_source + wav_filename
 
     #----[ SET AUDIO FILE EXTENSIONS ]
     if export_audio_codec == "PCM":
@@ -955,7 +955,7 @@ if blender_audio_codec != "NONE":
     print(" Extracting Audio as " + export_audio_container + "("\
     + export_audio_codec + ")")
     path_to_save_pcm = full_root_filepath\
-        + relative_path_to_av_source\
+        + rel_path_to_av_source\
         + wav_filename\
         + export_audio_file_extension
 
@@ -979,11 +979,11 @@ if blender_audio_codec != "NONE":
         + path_to_save_pcm + "\"" + " -af "\
         + "\"volume=" + str(blender_audio_volume) + "\""\
         + " " + "\"" + full_root_filepath\
-        + relative_path_to_av_source\
+        + rel_path_to_av_source\
         + wav_filename + "_newVolume" + export_audio_file_extension + "\""
         subprocess.call(fix_volume, shell=True)
 
-        move_wav_from = full_root_filepath + relative_path_to_av_source\
+        move_wav_from = full_root_filepath + rel_path_to_av_source\
         + wav_filename + "_newVolume" + export_audio_file_extension
 
         move_wav_to = path_to_save_pcm
@@ -993,7 +993,7 @@ if blender_audio_codec != "NONE":
     blender_audio_extract_time_end = time.time()                               #  | End lossless audio timer
 
     #----[ CREATE LOSSY AUDIO COMMAND STRING ]
-    path_to_compressed_audio = full_root_filepath + relative_path_to_av_source
+    path_to_compressed_audio = full_root_filepath + rel_path_to_av_source
     path_to_compressed_audio += wav_filename + "." # add extension later.
 
     if blender_audio_codec == "AAC":                                           #  | Make acception for AAC codec
@@ -1073,36 +1073,36 @@ if blender_audio_codec != "NONE":
 your render settings.")
             exit()
 
-#_______________________________________________________________________________
+#______________________________________________________________________________
 #
 #            SET THE EXTENSIONS FOR EACH OF OUR VIDEO FORMATS/CODECS
-#_______________________________________________________________________________
+#______________________________________________________________________________
 
 if blender_file_format in ("AVI_JPEG","AVI_RAW"):
     file_extension = ".avi"
-elif blender_video_format in ("AVI","H264","XVID"):
+elif blender_vid_format in ("AVI","H264","XVID"):
     file_extension = ".avi"
-elif blender_video_format == "DV":
+elif blender_vid_format == "DV":
     file_extension = ".dv"
-elif blender_video_format == "FLASH":
+elif blender_vid_format == "FLASH":
     file_extension = ".flv"
-elif blender_video_format == "MKV":
+elif blender_vid_format == "MKV":
     file_extension = ".mkv"
-elif blender_video_format == "MPEG1":
+elif blender_vid_format == "MPEG1":
     file_extension = ".mpg"
-elif blender_video_format == "MPEG2":
+elif blender_vid_format == "MPEG2":
     file_extension = ".dvd"
-elif blender_video_format == "MPEG4":
+elif blender_vid_format == "MPEG4":
     file_extension = ".mp4"
-elif blender_video_format == "OGG":
+elif blender_vid_format == "OGG":
     file_extension = ".ogv"
-elif blender_video_format == "QUICKTIME":
+elif blender_vid_format == "QUICKTIME":
     file_extension = ".mov"
 
-#_______________________________________________________________________________
+#______________________________________________________________________________
 #
 #              CREATE STRING FOR THE BACKGROUND BLENDER INSTANCES
-#_______________________________________________________________________________
+#______________________________________________________________________________
 
 #----[ SET NUMBER OF FRAMES THAT WILL BE RENDERED ON EACH ENABLED CORE ]
 portion_of_frames_per_core = math.ceil(total_number_of_frames / cores_enabled)
@@ -1124,7 +1124,7 @@ while next_core <= cores_enabled:
         blender_command += r'9>"%lock%' + str(next_core) + r'" '               #  | only Windows needs to create a lock file for each blender job.
 
     blender_command +=\
-        "\"" + path_to_blender + "\"" " -b \"%s\"" % (filename_and_path)\
+        "\"" + blender_path + "\"" " -b \"%s\"" % (filename_and_path)\
         + " -P " + "\"" + full_root_filepath + working_dir_temp + slash\
         + other_files_dir + slash + blendfile_override_setting_filename + "\""\
         + " -E %s" % (blender_render_engine)\
@@ -1133,7 +1133,7 @@ while next_core <= cores_enabled:
 
     if not blender_image_sequence:
         blender_command +=\
-        " -o \"%s%s" % (full_root_filepath, relative_path_to_av_source)\
+        " -o \"%s%s" % (full_root_filepath, rel_path_to_av_source)\
         + "%d%s\" -a" % (next_core, file_extension) + ampersand + "\n"
     elif blender_image_sequence:
         blender_command +=\
@@ -1173,21 +1173,21 @@ if my_platform == "Windows":                                                   #
 
     blender_command = wait_blender_routine
 
-#==============================================================================#
-#                    IF IMAGE SEQUENCE, SKIP TO FINAL RENDER                   #
-#==============================================================================#
+#=============================================================================#
+#                    IF IMAGE SEQUENCE, SKIP TO FINAL RENDER                  #
+#=============================================================================#
 
 if blender_image_sequence:
     full_command_string = blender_command + wait_here 
-#_______________________________________________________________________________
+#______________________________________________________________________________
 #
 #                              VIDEO CONCATENATION
-#_______________________________________________________________________________
+#______________________________________________________________________________
 
 if not blender_image_sequence:
 
     #----[ SET VARIABLES FOR CONCATENATION ]
-    joined_video_no_audio = full_root_filepath + relative_path_to_av_source\
+    joined_video_no_audio = full_root_filepath + rel_path_to_av_source\
     + joined_video
 
     num_vids = 1
@@ -1197,7 +1197,7 @@ if not blender_image_sequence:
 
     while num_vids<=cores_enabled:
         vid_file += "file '" + full_root_filepath +\
-        "%s%s%s'\n" % (relative_path_to_av_source, num_vids, file_extension)
+        "%s%s%s'\n" % (rel_path_to_av_source, num_vids, file_extension)
         num_vids += 1
 
     with open(concat_file, "w+") as f:
@@ -1222,10 +1222,10 @@ if not blender_image_sequence:
 
     full_command_string += end_line + wait_here                                #  | Bash's 'wait' prevents continuing until all jobs are done. I <3 U Bash
 
-    #___________________________________________________________________________
+    #__________________________________________________________________________
     #
     #                  MUX AUDIO AND VIDEO INTO ONE MEDIA FILE
-    #___________________________________________________________________________
+    #__________________________________________________________________________
 
     #----[ SET PATH TO FINISHED VIDEO FILE WITH AUDIO ]
     joined_video_with_audio = full_root_filepath + audio_and_video
@@ -1261,10 +1261,10 @@ if not blender_image_sequence:
 
         full_command_string += end_line
 
-#_______________________________________________________________________________
+#______________________________________________________________________________
 #
 #                              CREATE ANIMATED GIF
-#_______________________________________________________________________________
+#______________________________________________________________________________
 
     if render_gif:
 
@@ -1279,7 +1279,7 @@ if not blender_image_sequence:
         + "\""\
         + " -vf \"fps=" + str(gif_framerate) + ",scale=" + str(gif_scale) \
         + ":-1:flags=lanczos,palettegen=stats_mode=" + stats_mode \
-        + "\" -y \"" + full_root_filepath + relative_path_to_av_source \
+        + "\" -y \"" + full_root_filepath + rel_path_to_av_source \
         + png_pallette + "\""
 
         full_command_string += end_line
@@ -1294,16 +1294,16 @@ if not blender_image_sequence:
         + file_extension\
         + "\""\
         + " -i \"" + full_root_filepath \
-        + relative_path_to_av_source + png_pallette \
-        + "\" -lavfi \"fps=" + str(gif_framerate) + ",scale=" + str(gif_scale) \
+        + rel_path_to_av_source + png_pallette \
+        + "\" -lavfi \"fps=" + str(gif_framerate) + ",scale=" + str(gif_scale)\
         + ":-1:flags=lanczos [x]; [x][1:v] paletteuse=dither=" \
         + dither_options + "\" -y \"" + full_root_filepath + final_gif_name\
         + "\""
 
-#_______________________________________________________________________________
+#______________________________________________________________________________
 #
 #                     EXECUTE COMMAND STRINGS FROM TERMINAL
-#_______________________________________________________________________________
+#______________________________________________________________________________
 
 #----[ SET PATH TO THE RENDER FILE ]
 render_filename_location = full_root_filepath + relative_path_to_other_files\
@@ -1319,12 +1319,12 @@ commands_to_execute = use_bash + "\"" + full_root_filepath\
 print(commands_to_execute)
 
 #----[ EXECUTE THE RENDER COMMAND FILE ]
-subprocess.call(commands_to_execute, shell=True) # run render script in terminal
+subprocess.call(commands_to_execute, shell=True) # run script in terminal
 
-#_______________________________________________________________________________
+#______________________________________________________________________________
 #
 #                           MOVE / DELETE MEDIA FILES
-#_______________________________________________________________________________
+#______________________________________________________________________________
 
 #----[ IF YOU HAVE NO AUDIO, NO NEED TO MUX, JUST MOVE VIDEO UP A DIRECTORY ]
 if blender_audio_codec == "NONE" and not render_gif\
@@ -1336,7 +1336,7 @@ and not blender_image_sequence:
 #----[ IF IMAGE SEQUENCE EXISTS, MOVE ANY WANTED AUDIO UP A DIRECTORY ]
 if blender_image_sequence and blender_audio_codec != "NONE":
     if not user_wants_to_convert_audio:
-        move_from = full_root_filepath + relative_path_to_av_source\
+        move_from = full_root_filepath + rel_path_to_av_source\
         + wav_filename\
         + export_audio_file_extension
         move_to = full_root_filepath + wav_filename + "_for_"\
@@ -1364,10 +1364,10 @@ way. This script will run normally the next\n time you run it. Just remember \
 to stop viewing the files in the\n " + working_dir_temp + " before the \
 script finishes.")
 
-#_______________________________________________________________________________
+#______________________________________________________________________________
 #
 #                               SCRIPT TIMER INFO
-#_______________________________________________________________________________
+#______________________________________________________________________________
 
 print(80 * "#" + "\n\n")
 
