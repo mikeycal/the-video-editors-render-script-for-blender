@@ -352,8 +352,8 @@ for scene in bpy.data.scenes:
         blender_x_resolution = scene.render.resolution_x #             (800)
         blender_y_resolution = scene.render.resolution_y #             (600)
         blender_res_percent = scene.render.resolution_percentage #     (50)
-        blender_file_format = scene.render.image_settings.file_format # (XVID)
-        blender_vid_format = scene.render.ffmpeg.format #            (MPEG4)
+        blender_file_format = scene.render.image_settings.file_format #(XVID)
+        blender_vid_format = scene.render.ffmpeg.format #              (MPEG4)
         blender_video_codec = scene.render.ffmpeg.codec #              (H264)
         blender_video_bitrate = scene.render.ffmpeg.video_bitrate #    (8000)
         blender_gop = scene.render.ffmpeg.gopsize #                    (18)
@@ -390,27 +390,27 @@ script.\n\n" + 80 * "#")
         else:
             blender_audio_mixrate = scene.render.ffmpeg.audio_mixrate
 
-       #Framerate                                                       (eg)
-        blender_fps = scene.render.fps #                                (24)
-        blender_fps_base = scene.render.fps_base #                      (1.001)
-        the_framerate_float = round(blender_fps / blender_fps_base,2) # (23.98)
+       #Framerate                                                      (eg)
+        blender_fps = scene.render.fps #                               (24)
+        blender_fps_base = scene.render.fps_base #                     (1.001)
+        the_framerate_float = round(blender_fps / blender_fps_base,2) #(23.98)
 
         #GIF Framerate
         if render_gif:
             if gif_framerate == "":
                 gif_framerate = the_framerate_float
 
-        #Start and End Frames                                           (eg)
-        start_frame_is = scene.frame_start #                            (1)
-        end_frame_is = scene.frame_end #                                (1000)
-        total_number_of_frames = end_frame_is - start_frame_is #        (999)
-        total_number_of_frames += 1 #                                   (1000) #  | We need to add 1 because the first frame is included
+        #Start and End Frames                                          (eg)
+        start_frame_is = scene.frame_start #                           (1)
+        end_frame_is = scene.frame_end #                               (1000)
+        total_number_of_frames = end_frame_is - start_frame_is #       (999)
+        total_number_of_frames += 1 #                                  (1000)  #  | We need to add 1 because the first frame is included
 
-        #Render Engine                                (eg)
-        blender_render_engine = scene.render.engine # (CYCLES)
+        #Render Engine                                                 (eg)
+        blender_render_engine = scene.render.engine #                  (CYCLES)
 
-        #Autosplit                                                  (eg)
-        blender_use_autosplit = scene.render.ffmpeg.use_autosplit # (True)
+        #Autosplit                                                     (eg)
+        blender_use_autosplit = scene.render.ffmpeg.use_autosplit #    (True)
 
     number_of_scenes += 1                                                      #  | How many scenes are we dealing with...
 
