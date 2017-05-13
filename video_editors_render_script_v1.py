@@ -31,11 +31,11 @@
 #
 # [ Multiple background Blender instances ]
 #  Thanks to Isti115's info on "How to make vse render faster"
-#  blender.stackexchange.com/questions/7738/how-to-make-vse-render-faster
+#  https://goo.gl/mt7IUY
 #
 # [ Animated GIF ]
 #  Thanks to ubitux's info on how to generate animated GIFS with ffmpeg
-#  http://blog.pkh.me/p/21-high-quality-gif-with-ffmpeg.html
+#  https://goo.gl/bs5Nk1
 #
 # [ Viewers like You ]
 #  Thanks to viewers like you that have watched my series, given me good
@@ -184,11 +184,11 @@ use_libfdk_acc = False # (Default: False) [True or False]                      #
 #----[ SHOULD WE CONVERT VIDEO TO AN ANIMATED GIF? ]                           #  | You must render a Movie format (e.g. mp4,avi,...) to create animated GIFs
 render_gif = False #(Default: False) [True or False]
 gif_framerate = "15" #(Default: "15") [use quotation marks(String)]            #  | If you use "" (empty), it will default to blender's FPS render setting
-stats_mode = "full" #(Default: full) [full or diff]
+stats_mode = "full" #(Default: full) [full, diff]
 custom_gif_scale_x_value = "" # (Default: "") [eg "640", "800", "1024"]        #  | If you set this to "" (empty), it will default to blender's render settings resolution
 dither_options = "none" # (Default: "none")                                    #  | Dither Options: "none", "bayer:bayer_scale=1", "bayer:bayer_scale=2",
                                                                                #  | "bayer:bayer_scale=3", "floyd_steinberg", "sierra2", "sierra2_4a", "heckbert"
-                                                                               #  | See http://blog.pkh.me/p/21-high-quality-gif-with-ffmpeg.html for help
+                                                                               #  | See https://goo.gl/bs5Nk1 for help
 #--------------------------------------------------------------------#
 #------------------------[ RENDER OVERRIDES ]------------------------#---------
 #--------------------------------------------------------------------#
@@ -314,12 +314,12 @@ export_audio_bitrate = 384 # kb/s (Default: 384)                               #
 export_audio_split_channels = False # (Default: False) [True or False]         #  | Turning this to True may cause loss of some audio
 
 #----[ DOCUMENTED BITRATE RANGE FOR SUPPORTED AUDIO CODECS ]                   #  | Wikipedia was my source for these bitrate limits
-max_audio_bitrate_ac3 = 640 #kb/s (AC3)                                        #  | If you know of better settings, email me.
+max_audio_bitrate_ac3 = 640 # kb/s (AC3)                                       #  | If you know of better settings, email me.
 max_audio_bitrate_aac = 529 # kb/s (AAC)
-max_audio_bitrate_mp3 = 320 #kb/s (MP3)
-max_audio_bitrate_mp2 = 384 #kb/s (MP2)
-min_audio_bitrate_ac3 = min_audio_bitrate_mp2 = 32 #kb/s (AC3) (MP2)
-min_audio_bitrate_aac = min_audio_bitrate_mp3 = 8 #kb/s (AAC) (MP3)
+max_audio_bitrate_mp3 = 320 # kb/s (MP3)
+max_audio_bitrate_mp2 = 384 # kb/s (MP2)
+min_audio_bitrate_ac3 = min_audio_bitrate_mp2 = 32 # kb/s (AC3) (MP2)
+min_audio_bitrate_aac = min_audio_bitrate_mp3 = 8 # kb/s (AAC) (MP3)
 
 #----[ FALLBACK AUDIO BITRATES ]
 max_audio_bitrate = 320 # kb/s
