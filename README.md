@@ -1,5 +1,10 @@
 ## The Video Editor's Render Script for Blender (ver. 1.0) 
 
+for 2.79RC+, please use the ALPHA version of this script here:
+https://github.com/mikeycal/the-video-editors-render-script-for-blender/blob/master/video_editors_render_script_2.79_ALPHA.py
+
+2.78C and lower should use Version 1.0 of this script.
+
 - [Core Features](#core-features)
 - [What you need](#what-you-need)
 - [Watch the video Demo](https://www.youtube.com/watch?v=rgwP5L1bICk)
