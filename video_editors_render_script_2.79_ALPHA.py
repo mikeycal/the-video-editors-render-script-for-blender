@@ -94,7 +94,7 @@ my_platform = platform.system()
 #______________________________________________________________________________
 
 if my_platform == "Windows": #SET MICROSOFT WINDOWS PATHS BELOW
-    blender_path = r"C:\blender-2.79-rc1-windows64\blender.exe"  #  | (leave "r" prefix) python doesn't like \ slashes
+    blender_path = r"C:\Users\mgm\Desktop\blender-2.79-rc1-windows64\blender.exe"  #  | (leave "r" prefix) python doesn't like \ slashes
     path_to_ffmpeg = r"C:\ffmpeg\bin\ffmpeg.exe"                               #  | (leave "r" prefix) python doesn't like \ slashes
     assumed_blend_filename = "1.blend"                                         #  | Save as... "1.blend" (Script looks for 1.blend file in script directory.)
     click_me = "Windows_Click_to_Render.bat"                                   #  | Created Clickable Render File
@@ -802,8 +802,8 @@ the first Scene showing. (First Scene is usually named, \"Scene\")\n\n"
                 print_banner += "          [ Bitrate: "\
                 + str(blender_video_bitrate) + " kb/s ] "
             else:
-                print_banner += "          [ Quality: "\
-                + str(blender_ffmpeg_preset) + " ] "
+                print_banner += "        [ Quality: "\
+                + str(blender_constant_rate_factor) + " ("+ blender_ffmpeg_preset +")] "
             
             print_banner += "[ Frames: " + str(start_frame_is) + " - "\
             + str(end_frame_is) + " ]" + " [ Color Mode: "\
