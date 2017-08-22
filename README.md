@@ -1,9 +1,18 @@
-## The Video Editor's Render Script for Blender (ver. 1.0) 
-
+----------------------------------------
+**Blender 2.79 Notice:** 
 for 2.79RC+, please use the ALPHA version of this script here:
 https://github.com/mikeycal/the-video-editors-render-script-for-blender/blob/master/video_editors_render_script_2.79_ALPHA.py
 
 2.78C and lower should use Version 1.0 of this script.
+
+For those of you that don't know, starting with Blender 2.79, Blender now allows you to encode with *Constant Bitrate* or *Constant Quality*. The newer **2.79_ALPHA** render script should mostly work. Having said that, I literally did a quick update in about 1 hour, tested it, and it seemed to work. I am putting it out early so those of you that are using 2.79 have a way to do multicore rendering.  Expect to find a bug. If you find any bugs, let me know. :)
+
+Remember to call the new Script name video_editors_render_script_2.79_ALPHA.py instead of the original script name video_editors_render_script_v1.py and to set the path to the 2.79 version of blender, in the alpha script.
+
+Have fun! ;)
+----------------------------------------
+
+## The Video Editor's Render Script for Blender (ver. 1.0) 
 
 - [Core Features](#core-features)
 - [What you need](#what-you-need)
