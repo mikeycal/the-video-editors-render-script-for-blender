@@ -111,7 +111,7 @@ This script assumes that blender is saved to the following default path: "C:\Pro
 
 ### Running the Script (9 Steps)
 
-1. If necessary, use your source code editor to set the path to FFmpeg and Blender. You need to go to line 97 and 98 in video_editors_render_script_v1.py
+1. If necessary, use your source code editor to set the path to FFmpeg and Blender. You need to go to line 97 and 98 in video_editors_render_script.py
 
  By default Line 97 and 98 are set to the following paths:
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -161,7 +161,7 @@ official link that is pointed to from ffmpeg.org: http://ffmpeg.org/download.htm
 
 ### Running the Script (7 Steps)
 
-1. If necessary, use your source code editor to set the path to FFmpeg and Blender. You need to go to line 103 and 104 in video_editors_render_script_v1.py
+1. If necessary, use your source code editor to set the path to FFmpeg and Blender. You need to go to line 103 and 104 in video_editors_render_script.py
 
  By default Line 103 and 104 are set to the following paths:
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -218,7 +218,7 @@ Alternatively:
 
 ### Running the Script (9 Steps)
 
-1. If necessary, use your source code editor to set the path to FFmpeg and Blender. You need to go to line 109 and 110 in video_editors_render_script_v1.py
+1. If necessary, use your source code editor to set the path to FFmpeg and Blender. You need to go to line 109 and 110 in video_editors_render_script.py
 
  By default Line 109 and 110 are set to the following paths:
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
