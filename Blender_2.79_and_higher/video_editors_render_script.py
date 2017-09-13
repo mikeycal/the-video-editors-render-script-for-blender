@@ -684,6 +684,19 @@ bypass_huffyuv_and_raw_avi_warnings = True ) \n\n" + 80 * "#" +"\n\n Press \
             print("Exiting Script...")
             exit()
 
+    #----[ DETECT CODECS THAT DON'T SUPPORT CONSTANT RATE FACTOR ]
+    if blender_video_codec != "H264" and blender_video_codec != "MPEG4":
+        if blender_constant_rate_factor != "NONE":
+            subprocess.call(clr_cmd, shell=True)
+            print(80 * "#")
+            print("\n Please reopen your .blend file, temporarily switch to H264\
+ Codec. Select 'None'\n from 'Output Quality', then reselect the non-H264 \
+codec that you want to use.\n You will need to set the Constant Video Bitrate \
+settings as well.\n Save and rerun the script. \n (Only H264 supports the \
+Constant Quality Settings; so you need to force \n Constant Bitrate instead.)\n")
+            print(80 * "#")
+            exit()
+
 #----[ DETECT IF FRAMESEVER IS SET ]
 if blender_file_format == "FRAMESERVER":
     subprocess.call(clr_cmd, shell=True)
