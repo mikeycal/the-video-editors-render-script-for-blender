@@ -12,7 +12,7 @@ Please right click and "save as" the 2.78 compatible script here:
 
 https://github.com/mikeycal/the-video-editors-render-script-for-blender/raw/master/Blender_2.78c_and_lower/video_editors_render_script.py
 
-
+## Table of Contents:
 - [Core Features](#core-features)
 - [What you need](#what-you-need)
 - [Watch the video Demo](https://www.youtube.com/watch?v=rgwP5L1bICk)
