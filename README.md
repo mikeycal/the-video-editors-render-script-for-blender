@@ -1,5 +1,5 @@
 ----------------------------------------
-**Blender 2.79 and higher Users:**
+**Blender 2.79 and Higher Users:**
 
 Please right click and "save as" the 2.79 compatible script here: 
 
