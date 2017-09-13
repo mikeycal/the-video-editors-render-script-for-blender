@@ -1,6 +1,6 @@
 ########################### BEGIN GPL LICENSE BLOCK ###########################
 #
-#     THE VIDEO EDITOR'S RENDER SCRIPT FOR BLENDER
+#     THE VIDEO EDITOR'S RENDER SCRIPT FOR BLENDER (2.78C and Lower) 
 #     Copyright (C) 2017 Mike Meyers 
 #
 #     This program is free software; you can redistribute it and/or
