@@ -1,4 +1,5 @@
-----------------------------------------
+## The Video Editor's Render Script for Blender
+
 **Blender 2.79 and Higher Users:**
 
 Please right click and "save as" the 2.79 compatible script here: 
@@ -11,7 +12,6 @@ Please right click and "save as" the 2.78 compatible script here:
 
 https://github.com/mikeycal/the-video-editors-render-script-for-blender/raw/master/Blender_2.78c_and_lower/video_editors_render_script.py
 
-## The Video Editor's Render Script for Blender
 
 - [Core Features](#core-features)
 - [What you need](#what-you-need)
