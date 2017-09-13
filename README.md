@@ -1,18 +1,17 @@
 ----------------------------------------
-**Blender 2.79 Notice:** 
-for 2.79RC+, please use the ALPHA version of this script here:
-https://github.com/mikeycal/the-video-editors-render-script-for-blender/blob/master/video_editors_render_script_2.79_ALPHA.py
+**Blender 2.79 and higher Users:**
 
-2.78C and lower should use Version 1.0 of this script.
+Please right click and "save as" the 2.79 compatible script here: 
 
-For those of you that don't know, starting with Blender 2.79, Blender now allows you to encode with *Constant Bitrate* or *Constant Quality*. The newer **2.79_ALPHA** render script should mostly work. Having said that, I literally did a quick update in about 1 hour, tested it, and it seemed to work. I am putting it out early so those of you that are using 2.79 have a way to do multicore rendering.  Expect to find a bug. If you find any bugs, let me know. :)
+https://github.com/mikeycal/the-video-editors-render-script-for-blender/raw/master/Blender_2.79_and_higher/video_editors_render_script.py
 
-Remember to call the new Script name video_editors_render_script_2.79_ALPHA.py instead of the original script name video_editors_render_script_v1.py and to set the path to the 2.79 version of blender, in the alpha script.
+**Blender 2.78c and Lower Users:**
 
-Have fun! ;)
-----------------------------------------
+Please right click and "save as" the 2.78 compatible script here:
 
-## The Video Editor's Render Script for Blender (ver. 1.0) 
+https://github.com/mikeycal/the-video-editors-render-script-for-blender/raw/master/Blender_2.78c_and_lower/video_editors_render_script.py
+
+## The Video Editor's Render Script for Blender
 
 - [Core Features](#core-features)
 - [What you need](#what-you-need)
@@ -71,8 +70,8 @@ Have fun! ;)
 ![Source Code Editor](https://github.com/mikeycal/the-video-editors-render-script-for-blender/blob/master/imgs/syntax_highlight.JPG)
 
 At times you will need to edit this Python Script. So I would advise that you download a free Source Code editor for your platform of choice. Here are my recommendations (I use Gedit):
-  - Windows: https://atom.io/, https://notepad-plus-plus.org/, https://wiki.gnome.org/Apps/Gedit
-  - OSX: https://atom.io/, https://wiki.gnome.org/Apps/Gedit
+  - Windows: https://notepad-plus-plus.org/, https://atom.io/
+  - OSX: https://atom.io/
   - GNU/Linux: https://atom.io/, https://wiki.gnome.org/Apps/Gedit, kate
 
 ## Tested and Working:
@@ -127,7 +126,7 @@ This script assumes that blender is saved to the following default path: "C:\Pro
 4. Run this script from the same folder using cmd.exe:
 (use the quotation marks for paths with spaces)
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-`"C:\Program Files\Blender Foundation\Blender\blender.exe" -b 1.blend -P video_editors_render_script_v1.py`
+`"C:\Program Files\Blender Foundation\Blender\blender.exe" -b 1.blend -P video_editors_render_script.py`
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 5. The script will create a clickable executable, in the same directory, that you can use for all future renders.
  (Windows_Click_to_Render.bat)
@@ -176,7 +175,7 @@ official link that is pointed to from ffmpeg.org: http://ffmpeg.org/download.htm
 
 4. Run this Script from the same folder using Terminal: 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-`/Applications/Blender/blender.app/Contents/MacOS/blender -b 1.blend -P video_editors_render_script_v1.py`
+`/Applications/Blender/blender.app/Contents/MacOS/blender -b 1.blend -P video_editors_render_script.py`
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 5. The script will create a clickable executable, in the same directory, that you can use for all future renders. (OSX_Click_to_Render.command)
 
@@ -237,7 +236,7 @@ Alternatively:
 
 5. Run this script from the same folder using the Terminal:
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-`blender -b 1.blend -P video_editors_render_script_v1.py`
+`blender -b 1.blend -P video_editors_render_script.py`
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 6. The script will create a clickable executable, in the same directory, that you can use for all future renders. (Linux_Click_to_Render.sh)
 
