@@ -13,7 +13,8 @@ Please right click and "save as" the 2.78 compatible script here:
 https://github.com/mikeycal/the-video-editors-render-script-for-blender/raw/master/Blender_2.78c_and_lower/video_editors_render_script.py
 
 # NOTICE (GIF rendering issue):
-FFmpeg **3.4** has a bug that causes the program to Hang during the GIF palettegen process. I would recommend using FFmpeg **3.3.3** until this bug is resolved.  
+FFmpeg **3.4** has a bug that causes the program to Hang during the GIF palettegen process. I would recommend using FFmpeg **3.3.3** until this bug is resolved. 
+**Update:** Palettegen seems to be fixed in the latest Nightly Builds - as of Dec 11, 2017.  
 
 ## Table of Contents:
 - [Core Features](#core-features)
