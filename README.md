@@ -1,16 +1,10 @@
 ## The Video Editor's Render Script for Blender
 
-**Blender 2.79 and Higher Users:**
+**Universal Blender Script:**
+(This universal script should work for every version of blender 2.7.0 and up.)
 
-Please right click and "save as" the 2.79 compatible script here: 
-
-https://github.com/mikeycal/the-video-editors-render-script-for-blender/raw/master/Blender_2.79_and_higher/video_editors_render_script.py
-
-**Blender 2.78c and Lower Users:**
-
-Please right click and "save as" the 2.78 compatible script here:
-
-https://github.com/mikeycal/the-video-editors-render-script-for-blender/raw/master/Blender_2.78c_and_lower/video_editors_render_script.py
+Please right click and "save as" script here: 
+https://github.com/mikeycal/the-video-editors-render-script-for-blender/raw/master/video_editors_render_script.py
 
 # NOTICE (GIF rendering issue):
 FFmpeg **3.4** has a bug that causes the program to Hang during the GIF palettegen process. I would recommend using FFmpeg **3.3.3** until this bug is resolved. 
