@@ -129,7 +129,7 @@ else: # OTHER OPERATING SYSTEMS PATHS BELOW
 #--------------------------------------------------------------------#
 
 display_script_settings_banner = True #(Default: True) [True or False]
-banner_wait_time = 7 # seconds (Default: 15)                                  #  | Number of seconds the script will display render settings before rendering starts.
+banner_wait_time = 15 # seconds (Default: 15)                                  #  | Number of seconds the script will display render settings before rendering starts.
 
 #--------------------------------------------------------------------#
 #---------------------------[ CPU SETTINGS ]-------------------------#---------
@@ -185,7 +185,7 @@ use_libfdk_acc = False # (Default: False) [True or False]                      #
 render_gif = False #(Default: False) [True or False]
 gif_framerate = "15" #(Default: "15") [use quotation marks(String)]            #  | If you use "" (empty), it will default to blender's FPS render setting
 stats_mode = "full" #(Default: full) [full, diff]
-custom_gif_scale_x_value = "800" # (Default: "") [eg "640", "800", "1024"]        #  | If you set this to "" (empty), it will default to blender's render settings resolution
+custom_gif_scale_x_value = "" # (Default: "") [eg "640", "800", "1024"]        #  | If you set this to "" (empty), it will default to blender's render settings resolution
 dither_options = "none" # (Default: "none")                                    #  | Dither Options: "none", "bayer:bayer_scale=1", "bayer:bayer_scale=2",
 the_scaler = "lanczos" # Default: "lanczos"                                    #  | "bayer:bayer_scale=3", "floyd_steinberg", "sierra2", "sierra2_4a", "heckbert" (See https://goo.gl/bs5Nk1)
                                                                                #  | Scaler options "lanczos", "bicubic","bilinear" ( more: https://ffmpeg.org/ffmpeg-scaler.html)
@@ -826,7 +826,7 @@ the first Scene showing. (First Scene is usually named, \"Scene\")\n\n"
         print_banner += "\n  GIF RENDER is [ ON ]\n ([ "\
         + gif_framerate + " FPS ] [ stats:" + stats_mode\
         + " ] [ Dither: " + dither_options + " ] [ X Scale: "\
-        + str(gif_scale) + "] [ Scaler: " + the_scaler + "])\n"
+        + str(gif_scale) + "] [Scaler:" + the_scaler + "])\n"
 
     if blender_audio_codec != "NONE" and not render_gif :
         print_banner += "\n  AUDIO: [ " + blender_audio_codec
@@ -1329,7 +1329,7 @@ if not blender_image_sequence:
         + "\" -lavfi \"fps=" + str(gif_framerate) + ",scale=" + str(gif_scale)\
         + ":-1:flags=" \
         + the_scaler \
-        + "[x]; [x][1:v] paletteuse=dither=" \
+        + " [x]; [x][1:v] paletteuse=dither=" \
         + dither_options \
         + "\" -y \"" + full_root_filepath + final_gif_name\
         + "\""
