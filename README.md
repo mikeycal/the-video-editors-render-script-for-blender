@@ -327,7 +327,13 @@ If you would like to see how different GIF settings alter your video, refer to t
          - "sierra2"
          - "sierra2_4a" 
          - "heckbert"
-
+   - **the_scaler**: ("lanczos" is default)  
+      - _Scaler Options_:
+         - "lanczos"
+         - "bicubic" 
+         - "bilinear" 
+         - see more options: https://ffmpeg.org/ffmpeg-scaler.html
+         
 I rendered the same video using different _dither_ and _stat_mode_ settings. Here are the file size results to compare. (See image quality difference [here](http://blog.pkh.me/p/21-high-quality-gif-with-ffmpeg.html). )
 
 ![gif file size](https://github.com/mikeycal/the-video-editors-render-script-for-blender/blob/master/imgs/comparegif.JPG)
