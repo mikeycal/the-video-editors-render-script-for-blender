@@ -84,6 +84,7 @@ import shutil
 import multiprocessing
 import math
 import subprocess
+from pathlib import Path
 
 #----[ DETECT OPERATING SYSTEM ]
 my_platform = platform.system()
@@ -223,6 +224,7 @@ blendfile_override_setting += "    scene.render.ffmpeg.audio_codec = 'NONE'\n" #
 
 #----[ GET NAME OF THIS SCRIPT ]
 name_of_script = os.path.basename(__file__)
+
 #______________________________________________________________________________
 #
 #                        OPERATING SYSTEM SPECIFIC SETTINGS
@@ -277,6 +279,30 @@ else: # OTHER OPERATING SYSTEMS WITH ACCESS TO BASH SHELL
 #
 #                              BASIC CONFIGURATION
 #______________________________________________________________________________
+
+#----[ DETECT IF BLENDER AND FFMPEG PATHS RESOLVE ]
+my_file = Path(blender_path)
+if not my_file.is_file():
+    subprocess.call(clr_cmd, shell=True)
+    print(80 * "#")
+    print("\n Blender program was not found. Please set the correct path to \
+Blender in the\n render script.")
+    print("\n The render script is set to look for Blender at the following\
+ location:\n")
+    print(" " + blender_path + "\n")
+    print(80 * "#")
+    exit()
+my_file = Path(path_to_ffmpeg)
+if not my_file.is_file():
+    subprocess.call(clr_cmd, shell=True)
+    print(80 * "#")
+    print("\n FFmpeg program was not found. Please set the correct path to\
+ FFmpeg in the\n render script.")
+    print("\n The render script is set to look for FFmpeg at the following\
+ location:\n")
+    print(" " + path_to_ffmpeg + "\n")
+    print(80 * "#")
+    exit()
 
 #----[ FIND THE PATH TO THIS SCRIPT ]
 full_root_filepath = os.path.dirname(bpy.data.filepath) + slash
@@ -336,10 +362,10 @@ else:
 #               GET RENDER PROPERTY SETTINGS FROM THE .BLEND FILE
 #______________________________________________________________________________
 
-# Blender version assumed by .blend file
+# Blender version reported by .blend file
 blender_ver = str(bpy.data.version[0]) + "" + str(bpy.data.version[1]) + "" + str(bpy.data.version[2])
 blender_ver = int(blender_ver)                                                #  | 2790 int value (2.79.0)
-# Blender version actually running 
+# Blender version being used for rendering 
 blender_ver_running = str(bpy.app.version[0]) + "" + str(bpy.app.version[1]) + "" + str(bpy.app.version[2])
 blender_ver_running = int(blender_ver_running)
 
