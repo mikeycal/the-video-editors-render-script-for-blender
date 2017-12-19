@@ -254,13 +254,13 @@ Alternatively:
 - - - - - - - - - - - - -
 **Where to Set Program Paths:**
 
-**Windows:** GOTO line 97, 98 
+**Windows:** GOTO line 98, 99 
 
-**OSX:** GOTO line 103, 104 
+**OSX:** GOTO line 104, 105 
 
-**Linux:** GOTO line 109, 110
+**Linux:** GOTO line 110, 111
 
-**Other:** GOTO line 116, 117
+**Other:** GOTO line 117, 118
 - - - - - - - - - - - - -
 
 2. **Where should I place this Script?**
@@ -276,10 +276,10 @@ The first time that you render with this script, you will need to run the follow
 
 - `cd c:\Users\mikeycal\Video` (Change to the directory with this script and 1.blend file.)
 
-- `"c:\PATH\ TO\ blender" -b 1.blend -P video_editors_render_script_v1.py` (Use Quotes with Spaces)
+- `"c:\PATH\ TO\ blender" -b 1.blend -P video_editors_render_script.py` (Use Quotes with Spaces)
 
 - - - - - - - 
-This script will automatically generate a "clickable" render file that you can use for all future renders. After you have run the script 1 time, you can move the "Click_to_Render" file and "video_editors_render_script_v1.py" file to any folder you like, it will render any project named 1.blend from any folder you place those 2 files in.
+This script will automatically generate a "clickable" render file that you can use for all future renders. After you have run the script 1 time, you can move the "Click_to_Render" file and "video_editors_render_script.py" file to any folder you like, it will render any project named 1.blend from any folder you place those 2 files in.
  
 **Windows:** `Windows_Click_to_Render.bat`
 
@@ -291,18 +291,21 @@ This script will automatically generate a "clickable" render file that you can u
 - - - - - - - 
 
 5. **How do I change the number of CPU cores that the Script can use?**
-     - To be clear, this process doesn't actually let you directly control the CPU Cores. It will allow you to control how many Blender instances you are running simultaneously. It just turns out that each Blender instance tends to utilize a single core of your CPU. By default, the script will create a Blender instance for each CPU core it detects, but you can virtually reserve cores using the "reserved_cpu_logical_cores" setting on line 139. A setting of 0 means reserve nothing, 1 means reserve 1 core. So on and so forth...
+     - To be clear, this process doesn't actually let you directly control the CPU Cores. It will allow you to control how many Blender instances you are running simultaneously. It just turns out that each Blender instance tends to utilize a single core of your CPU. By default, the script will create a Blender instance for each CPU core it detects, but you can virtually reserve cores using the "reserved_cpu_logical_cores" setting on line 141. A setting of 0 means reserve nothing, 1 means reserve 1 core. So on and so forth...
 
-6. **Can I deactivate multi-core rendering and use this script for rendering 3D projects?**
+6. **What are the RAM requirements?**
+     - From my test, on Blender 2.79, it appears that each Logical Core creates an instance of Blender that requires aproximately 1.6GB of RAM per Instance. My results are based on rendering a 3840 x 4320 (4K, Quad-Full-HD x 2), video provided here http://bbb3d.renderfarming.net/download.html, on a 4 core Intel i5-3570K. If each instance does not have 1.6GB RAM, you will notice that the render will slow down to a crawl. So make sure that you set "reserved_cpu_logical_cores" to a number that keeps you under the RAM requirement. The newer processors have as many as 32 logical cores, that would require 52GB system RAM if you wanted to use every core. 
+     
+7. **Can I deactivate multi-core rendering and use this script for rendering 3D projects?**
      - Yes, you can set the "force_one_instance_render" setting to "True" (line 142) and use this script to render anything you created with blender. It is equivalent to rendering the "standard way", only without the interface. It will allow you to access the additional FFmpeg features of this script with any blender project.
 
-7. **How do I alter the MUX settings to add custom FFmpeg arguments to the final video?**
+8. **How do I alter the MUX settings to add custom FFmpeg arguments to the final video?**
      - If you choose, you can alter the FFmpeg mux settings on line 163 and 164. By default this script uses these lines to add stuff like "FastStart" to your final video. 
 
-8. **How do I use FFmpeg's range of bitrate settings instead of Blender's?**
+9. **How do I use FFmpeg's range of bitrate settings instead of Blender's?**
      - set "use_ffmpeg_audio_bitrates" setting to "True" on line 172 and enter a desired bitrate setting where it says, "custom_audio_bitrate" on line 175. This script will automatically detect if your bitrate is out of range, for you audio codec, and set it to the nearest in-range setting. By default, Blender locks your audio bitrate to 32kb/s - 384kb/s. But when you use FFmpeg bitrate settings, you can set the bitrate to 8kb/s - 640kb/s. The audio is extracted from the Blender project as lossless PCM audio before conversion. 
 
-9. **How do I render an Animated GIF?**
+10. **How do I render an Animated GIF?**
      - Go to Line 184 and set "render_gif" setting to "True". You can set the other gif settings in the same section. It's important to note that you must render using a Video Format (mp4, avi, mov, ...) in order to get GIF conversion to work. 
 If you would like to see how different GIF settings alter your video, refer to the source material I used to write this feature: http://blog.pkh.me/p/21-high-quality-gif-with-ffmpeg.html
 
@@ -332,7 +335,7 @@ I rendered the same video using different _dither_ and _stat_mode_ settings. Her
 
 ![gif file size](https://github.com/mikeycal/the-video-editors-render-script-for-blender/blob/master/imgs/comparegif.JPG)
                                                                               
-10. **How do I set Automatic .blend file settings?**
+11. **How do I set Automatic .blend file settings?**
      - On line 203 you can add settings that you want to be used as overrides. These settings will override anything that you have set in the _Blender Render Properties_ window of blender. It's important to note that `scene.render.ffmpeg.audio_codec = 'NONE'\n` must be included. It turns off the audio for your project. Audio is rendered separately with this script, so it must be turned off when the video is rendering. Leaving audio on will simply slow down the render.
 
 - - - - - - - 
