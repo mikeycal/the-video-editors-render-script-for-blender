@@ -46,7 +46,7 @@
 #
 # (1) SET THE PATH TO THE BLENDER AND FFMPEG PROGRAMS:
 #
-#  Set full paths for Blender and FFMPEG in the section starting on line 93
+#  Set full paths for Blender and FFMPEG in the section starting on line 94
 #
 # RECOMMENDED PATHS FOR PROGRAMS (Set By Default):
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -131,14 +131,15 @@ else: # OTHER OPERATING SYSTEMS PATHS BELOW
 
 display_script_settings_banner = True #(Default: True) [True or False]
 banner_wait_time = 15 # seconds (Default: 15)                                  #  | Number of seconds the script will display render settings before rendering starts.
+show_cpu_core_lowram_notice = True # Default: True) [True or False]            #  | Display that we need 1.6GB per CPU core available
 
 #--------------------------------------------------------------------#
 #---------------------------[ CPU SETTINGS ]-------------------------#---------
 #--------------------------------------------------------------------#
 
 #----[ NUMBER OF LOGICAL CPU CORES RESERVED TO RUN OPERATING SYSTEM ]          #  | I use a setting of 0 without any issues (I have a Intel i5 3570K w/ 16GB RAM)
-reserved_cpu_logical_cores = 0 # (Default: 0) [1 = safe mode]                  #  | [0 = all cores] (Each non-reserved core uses 1 additional instance of blender)
-
+reserved_cpu_logical_cores = 0 # (Default: 0) [1 = safe mode]                  #  | [0 = use all cores] (Each used core creates 1 additional instance of blender & requires aprox. 1.6GB RAM)
+                                                                               #  | e.g. a setting of 2 on a 4 core CPU would use (4 - 2) Cores of your CPU and 1.6GB RAM x (4 - 2)
 #----[ FORCE 1 BLENDER INSTANCE ] (!DISABLES MULTICORE FUNCTIONALITY!)         #  | When True, this disables multicore rendering, but it lets you use external
 force_one_instance_render = False # (Default: False) [True or False]           #  | FFmpeg with any of your blender projects. Including keyframed 3D Scenes
                                                                                #  | Basically, this let's you render any .blend file without the interface.
@@ -280,13 +281,13 @@ else: # OTHER OPERATING SYSTEMS WITH ACCESS TO BASH SHELL
 #                              BASIC CONFIGURATION
 #______________________________________________________________________________
 
-#----[ DETECT IF BLENDER AND FFMPEG PATHS RESOLVE ]
+#----[ DETECT IF BLENDER AND FFMPEG PATHS ARE CORRECTLY CONFIGURED ]
 my_file = Path(blender_path)
 if not my_file.is_file():
     subprocess.call(clr_cmd, shell=True)
     print(80 * "#")
     print("\n Blender program was not found. Please set the correct path to \
-Blender in the\n render script.")
+Blender in the\n render script. (Edit Section starting at line 94 of Script)")
     print("\n The render script is set to look for Blender at the following\
  location:\n")
     print(" " + blender_path + "\n")
@@ -297,7 +298,7 @@ if not my_file.is_file():
     subprocess.call(clr_cmd, shell=True)
     print(80 * "#")
     print("\n FFmpeg program was not found. Please set the correct path to\
- FFmpeg in the\n render script.")
+ FFmpeg in the\n render script. (Edit Section starting at line 94 of Script)")
     print("\n The render script is set to look for FFmpeg at the following\
  location:\n")
     print(" " + path_to_ffmpeg + "\n")
@@ -363,10 +364,12 @@ else:
 #______________________________________________________________________________
 
 # Blender version reported by .blend file
-blender_ver = str(bpy.data.version[0]) + "" + str(bpy.data.version[1]) + "" + str(bpy.data.version[2])
+blender_ver = str(bpy.data.version[0]) + "" + str(bpy.data.version[1]) + "" +\
+ str(bpy.data.version[2])
 blender_ver = int(blender_ver)                                                #  | 2790 int value (2.79.0)
 # Blender version being used for rendering 
-blender_ver_running = str(bpy.app.version[0]) + "" + str(bpy.app.version[1]) + "" + str(bpy.app.version[2])
+blender_ver_running = str(bpy.app.version[0]) + "" + str(bpy.app.version[1]) +\
+ "" + str(bpy.app.version[2])
 blender_ver_running = int(blender_ver_running)
 
 if blender_ver_running != blender_ver:
@@ -741,8 +744,8 @@ bypass_huffyuv_and_raw_avi_warnings = True ) \n\n" + 80 * "#" +"\n\n Press \
             if blender_constant_rate_factor != "NONE":
                 subprocess.call(clr_cmd, shell=True)
                 print(80 * "#")
-                print("\n Please reopen your .blend file, temporarily switch to H264\
- Codec. Select 'None'\n from 'Output Quality', then reselect the non-H264 \
+                print("\n Please reopen your .blend file, temporarily switch to\
+ H264 Codec. Select 'None'\n from 'Output Quality', then reselect the non-H264 \
 codec that you want to use.\n You will need to set the Constant Video Bitrate \
 settings as well.\n Save and rerun the script. \n (Only H264 supports the \
 Constant Quality Settings; so you need to force \n Constant Bitrate instead.)\n")
@@ -791,8 +794,11 @@ if display_script_settings_banner:
     + 17 * "#"+ "\n")
 
     print(" Use [ " + str(cores_enabled) + " of "\
-    + str(logical_cores_available)\
-    + " ] Logical CPU Cores\n")
+    + str(logical_cores_available) + " ] Logical CPU Cores\n ")
+    if show_cpu_core_lowram_notice:
+        print("| Notice: For best render time, each Core needs aprox. 1.6GB RAM\
+. Reduce CPU |\n| Cores if you experience severe slowdown due to Low\
+ RAM. (Script Line 141)  |\n")
 
     if force_one_instance_render:
         print(" Script will Force 1 blender Instance. (MultiCore is [ OFF ])"\
@@ -838,23 +844,23 @@ the first Scene showing. (First Scene is usually named, \"Scene\")\n\n"
                print_banner += "  VIDEO: [ " + blender_file_format
                hide_codec = True 
             elif blender_vid_format == "QUICKTIME":
-                print_banner += "  VIDEO: [ MOV"                                   #  | Quicktime Format uses MOV container
+                print_banner += "  VIDEO: [ MOV"                               #  | Quicktime Format uses MOV container
             elif blender_vid_format == "H264":
-                print_banner += "  VIDEO: [ AVI"                                   #  | H264 Format uses AVI container
+                print_banner += "  VIDEO: [ AVI"                               #  | H264 Format uses AVI container
             else:
                 print_banner += "  VIDEO: [ " + blender_vid_format
         
             if not hide_codec:
                 if blender_video_codec == "MPEG4":
-                    print_banner += " ( DIVX ) ] [ "                               #  | DIVX oddly reports that it uses MPEG4 codec
+                    print_banner += " ( DIVX ) ] [ "                           #  | DIVX oddly reports that it uses MPEG4 codec
                 elif blender_vid_format in ("MPEG1","MPEG2","FLASH","XVID", "DV"):
-                    print_banner += " ] [ "                                        #  | Remove False Codec Reporting
+                    print_banner += " ] [ "                                    #  | Remove False Codec Reporting
                 elif blender_vid_format == "H264":
                     print_banner += " (H264) ] [ " 
                 else:
                     print_banner += " ( " + blender_video_codec + " ) ] [ "
             else:
-                print_banner += " ] [ "                                            #  | This close the AVI_JPEG and AVI_RAW settings
+                print_banner += " ] [ "                                        #  | This close the AVI_JPEG and AVI_RAW settings
 
             print_banner += str(blender_x_times_res_percent) + " x "\
             + str(blender_y_times_res_percent) + " ]"
@@ -879,23 +885,23 @@ the first Scene showing. (First Scene is usually named, \"Scene\")\n\n"
                print_banner += "  VIDEO: [ " + blender_file_format
                hide_codec = True 
             elif blender_vid_format == "QUICKTIME":
-                print_banner += "  VIDEO: [ MOV"                                   #  | Quicktime Format uses MOV container
+                print_banner += "  VIDEO: [ MOV"                               #  | Quicktime Format uses MOV container
             elif blender_vid_format == "H264":
-                print_banner += "  VIDEO: [ AVI"                                   #  | H264 Format uses AVI container
+                print_banner += "  VIDEO: [ AVI"                               #  | H264 Format uses AVI container
             else:
                 print_banner += "  VIDEO: [ " + blender_vid_format
         
             if not hide_codec:
                 if blender_video_codec == "MPEG4":
-                    print_banner += " ( DIVX ) ] [ "                               #  | DIVX oddly reports that it uses MPEG4 codec
+                    print_banner += " ( DIVX ) ] [ "                           #  | DIVX oddly reports that it uses MPEG4 codec
                 elif blender_vid_format in ("MPEG1","MPEG2","FLASH","XVID", "DV"):
-                    print_banner += " ] [ "                                        #  | Remove False Codec Reporting
+                    print_banner += " ] [ "                                    #  | Remove False Codec Reporting
                 elif blender_vid_format == "H264":
                     print_banner += " (H264) ] [ " 
                 else:
                     print_banner += " ( " + blender_video_codec + " ) ] [ "
             else:
-                print_banner += " ] [ "                                            #  | This close the AVI_JPEG and AVI_RAW settings
+                print_banner += " ] [ "                                        #  | This close the AVI_JPEG and AVI_RAW settings
 
             print_banner += str(blender_x_times_res_percent) + " x "\
             + str(blender_y_times_res_percent) + " ]"
