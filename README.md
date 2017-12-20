@@ -72,12 +72,12 @@ At times you will need to edit this Python Script. So I would advise that you do
   - GNU/Linux: https://atom.io/, https://wiki.gnome.org/Apps/Gedit, kate
 
 ## Tested and Working:
-- Windows 10 (v1607)[Anniversary Update] and (v1703)[Creators Update]
+- Windows 10 (v1709)[Creators Update]
 - OSX 10.11
 - GNU/Linux (Ubuntu 16.04 LTS) (Arch Linux [tested 3/30/17])
 
 ## Untested, but should work:
-- Windows Vista, 7, 8
+- Windows Vista, 7, 8 and all older versions of Windows 10
 - OSX 10.9+ 
 - Any modern GNU/Linux distribution supporting Bash Shell, FFmpeg 3.2+ and Blender 2.7+
 - Any OS that has access to Bash Shell, FFmpeg 3.2+ and Blender 2.7+
@@ -293,7 +293,7 @@ This script will automatically generate a "clickable" render file that you can u
      - To be clear, this process doesn't actually let you directly control the CPU Cores. It will allow you to control how many Blender instances you are running simultaneously. It just turns out that each Blender instance tends to utilize a single core of your CPU. By default, the script will create a Blender instance for each CPU core it detects, but you can virtually reserve cores using the "reserved_cpu_logical_cores" setting on line 141. A setting of 0 means reserve nothing, 1 means reserve 1 core. So on and so forth...
 
 6. **What are the RAM requirements? (1.6GB - 3GB per Core)**
-     - The more RAM you have the better. From my test, on Blender 2.79, it appears that each Logical Core creates an instance of Blender that requires aproximately 1.6GB of RAM per blender instance. My results are based on rendering a 3840 x 4320 (4K, Quad-Full-HD x 2), video provided here http://bbb3d.renderfarming.net/download.html, on a 4 core Intel i5-3570K with 16GB RAM. If each instance does not have enough RAM, you will notice that the render will slow down to a crawl. So make sure that you set "reserved_cpu_logical_cores" to a number that keeps you under the RAM requirement. The more cpu cores you reserve, the less RAM is used. I believe that the highest RAM useage I have ever seen, per core, was about 3GB. I would test your system with different "reserved_cpu_logical_cores" settings and see what setting works best on your system. 
+     - The more RAM you have the better. From my test, on Blender 2.79, it appears that each Logical Core creates an instance of Blender that requires approximately 1.6GB of RAM per blender instance. My results are based on rendering a 3840 x 4320 (4K, Quad-Full-HD x 2), video provided here http://bbb3d.renderfarming.net/download.html, on a 4 core Intel i5-3570K with 16GB RAM. If each instance does not have enough RAM, you will notice that the render will slow down to a crawl. So make sure that you set "reserved_cpu_logical_cores" to a number that keeps you under the RAM requirement. The more cpu cores you reserve, the less RAM is used. I believe that the highest RAM useage I have ever seen, per core, was about 3GB. I would test your system with different "reserved_cpu_logical_cores" settings and see what setting works best on your system. 
      
 7. **Can I deactivate multi-core rendering and use this script for rendering 3D projects?**
      - Yes, you can set the "force_one_instance_render" setting to "True" (line 142) and use this script to render anything you created with blender. It is equivalent to rendering the "standard way", only without the interface. It will allow you to access the additional FFmpeg features of this script with any blender project.
