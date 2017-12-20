@@ -131,15 +131,15 @@ else: # OTHER OPERATING SYSTEMS PATHS BELOW
 
 display_script_settings_banner = True #(Default: True) [True or False]
 banner_wait_time = 15 # seconds (Default: 15)                                  #  | Number of seconds the script will display render settings before rendering starts.
-show_cpu_core_lowram_notice = True # Default: True) [True or False]            #  | Display that we need 1.6GB per CPU core available
+show_cpu_core_lowram_notice = True # Default: True) [True or False]            #  | Display that we need 1.6GB to 3GB per CPU core available
 
 #--------------------------------------------------------------------#
 #---------------------------[ CPU SETTINGS ]-------------------------#---------
 #--------------------------------------------------------------------#
 
-#----[ NUMBER OF LOGICAL CPU CORES RESERVED TO RUN OPERATING SYSTEM ]          #  | [0 = use all cores] (Each used core creates 1 additional instance of blender. 1.6GB RAM/Core is required)
+#----[ NUMBER OF LOGICAL CPU CORES RESERVED TO RUN OPERATING SYSTEM ]          #  | [0 = use all cores] (Each used core creates 1 additional instance of blender. 1.6GB to 3GB RAM/Core is required)
 reserved_cpu_logical_cores = 0 # (Default: 0) [1 = safe mode]                  #  | "reserved_cpu_logical_cores" setting subtracts cores from the total available.
-                                                                               #  | e.g. reserved_cpu_logical_cores = 3 (on a 8 core CPU) will limit the script to use only 5 of 8 cores & (5 x 1.6GB RAM)
+                                                                               #  | e.g. reserved_cpu_logical_cores = 3 (on a 8 core CPU) will limit the script to use only 5 of 8 cores.
 #----[ FORCE 1 BLENDER INSTANCE ] (!DISABLES MULTICORE FUNCTIONALITY!)         #  | When True, this disables multicore rendering, but it lets you use external
 force_one_instance_render = False # (Default: False) [True or False]           #  | FFmpeg with any of your blender projects. Including keyframed 3D Scenes
                                                                                #  | Basically, this let's you render any .blend file without the interface.
@@ -796,7 +796,7 @@ if display_script_settings_banner:
     print(" Use [ " + str(cores_enabled) + " of "\
     + str(logical_cores_available) + " ] Logical CPU Cores\n ")
     if show_cpu_core_lowram_notice:
-        print("| For best render time, each Core needs aprox. 1.6GB RAM. Reserv\
+        print("| For best render time, each Core needs 1.6GB to 3GB RAM. Reserv\
 e more CPU |\n| Cores if you experience severe slowdown due to Low\
  RAM. (Script Line 141)|\n")
 
