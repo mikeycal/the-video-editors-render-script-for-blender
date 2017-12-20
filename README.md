@@ -95,7 +95,7 @@ At times you will need to edit this Python Script. So I would advise that you do
 ### Setup FFmpeg (6 Steps)
 ![get ffmpeg for windows](https://github.com/mikeycal/the-video-editors-render-script-for-blender/blob/master/imgs/ffmpeg_win.jpg)
 1. Download the latest build of ffmpeg for Windows at the following URL: https://ffmpeg.zeranoe.com/builds/ That URL is the Official URL recommended by the official website: https://ffmpeg.org/download.html#build-windows 
-2. Get the Static 'Release' (3.2.4 or higher), for your Architecture
+2. Get the Static 'Release' (3.2.4 or higher), for your Architecture (Avoid FFmpeg 3.3.4 and 3.4.0 they are buggy.)
 3. Unzip the ffmpeg-version-date-static.zip file by right clicking on it and selecting 'Extract All...' 
 4. Extract All to C:\ ( The root directory for Windows )
 5. Change the folder's name to C:\ffmpeg\ [ This is scripts default location for FFmpeg]
