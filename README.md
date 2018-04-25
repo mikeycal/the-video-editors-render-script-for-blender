@@ -3,11 +3,8 @@
 **Universal Blender Script:**
 (This universal script should work for every version of blender 2.7.0 and up.)
 
-Please right click and "save as" script here: 
+Please right click on the following link and "save as": 
 https://github.com/mikeycal/the-video-editors-render-script-for-blender/raw/master/video_editors_render_script.py
-
-# NOTICE (GIF rendering issue):
-FFmpeg **3.3.4 and 3.4.0** have a bug that causes the program to hang during the GIF palettegen process. Fortunatly, developers have fixed the problem in **3.4.1**.   
 
 ## Table of Contents:
 - [Core Features](#core-features)
@@ -59,7 +56,7 @@ FFmpeg **3.3.4 and 3.4.0** have a bug that causes the program to hang during the
 ## What you need:
 - Windows requires cmd.exe (Command Prompt) or powershell.exe (PowerShell)
 - OSX, GNU/Linux and other Operating Systems require Bash Shell access
-- All Operating Systems require Blender 2.7+ and FFmpeg 3.2+
+- All Operating Systems require Blender 2.7+ and FFmpeg 3.4.1+
 - CPU with, at least, 2 Logical Cores for render Speedup
 - Source Code Editor with Syntax Highlighting to edit the Script
 
@@ -74,12 +71,12 @@ At times you will need to edit this Python Script. So I would advise that you do
 ## Tested and Working:
 - Windows 10 (v1709)[Creators Update]
 - OSX 10.11
-- GNU/Linux (Ubuntu 16.04 LTS) (Arch Linux [tested 3/30/17])
+- GNU/Linux (Ubuntu 16.04 LTS),(Ubuntu 17.10)
 
 ## Untested, but should work:
 - Windows Vista, 7, 8 and all older versions of Windows 10
 - OSX 10.9+ 
-- Any modern GNU/Linux distribution supporting Bash Shell, FFmpeg 3.2+ and Blender 2.7+
+- Any modern GNU/Linux distribution supporting Bash Shell, FFmpeg 3.2+ (Avoid 3.3.4 and 3.4.0) and Blender 2.7+
 - Any OS that has access to Bash Shell, FFmpeg 3.2+ and Blender 2.7+
 - Windows XP should work, although, Blender support ended after version 2.76
 - OSX 10.6 to 10.8 should work when using http://www.ffmpegmac.net/ build. )
