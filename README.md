@@ -79,7 +79,7 @@ At times you will need to edit this Python Script. So I would advise that you do
 - Any modern GNU/Linux distribution supporting Bash Shell, FFmpeg 3.2+ (Avoid 3.3.4 and 3.4.0) and Blender 2.7+
 - Any OS that has access to Bash Shell, FFmpeg 3.2+ and Blender 2.7+
 - Windows XP should work, although, Blender support ended after version 2.76
-- OSX 10.6 to 10.8 should work when using http://www.ffmpegmac.net/ build. )
+- OSX 10.6 to 10.8 should work if you can find a binary for FFmpeg 3.2+ on the web. (Sorry, I no longer have a direct link)
 
 ## Microsoft Windows 10 Setup
 
