@@ -1,6 +1,12 @@
-## The Video Editor's Render Script for Blender
+## The Video Editor's Render Script for Blender (for Blender 2.7 - 2.79b)
 
-**Universal Blender Script:**
+**!NOTICE FOR BLENDER 2.8 (BETA) USERS!**
+
+It looks like Blender 2.8 (BETA) is finally utilizing 100% of multi-core CPUs, when doing FFMPEG-video rendering internally. I am seeing reports of 100% CPU usage in my tests. (quad-core i5, Nvidia 1060 GPU) If this is true, it would mean that we no longer need to use THIS render script to speed up our renders on Blender 2.8 Beta or higher. (Please correct me if I am wrong about this. I haven't had the time to do a full range of tests on different video codecs.)
+
+2.70 - 2.79b users should can still use the render script. 
+
+**Universal Blender Script (2.70 - 2.79b):**
 (This universal script should work for every version of blender 2.7.0 and up.)
 
 Please right click on the following link and "save as": 
