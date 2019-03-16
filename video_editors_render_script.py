@@ -233,7 +233,7 @@ name_of_script = os.path.basename(__file__)
 
 if my_platform == "Windows": # Windows 10
     slash = "\\"                                                               #  | Operating system slash direction
-    start_blender = start_ffmpeg = r'start " " /B '                            #  | Leave this setting.
+    start_blender = start_ffmpeg = r'start " " /max /B '                       #  | Leave this setting. Win10 v1809+ build broke start - now needs /max arg to work.
     wait_here = ampersand = use_bash = ""                                      #  | Windows doesn't use - leave empty
     render_filename = "render.bat"                                             #  | Executable OS Commands Stored here
     clr_cmd = "cls"                                                            #  | Windows Clear command
