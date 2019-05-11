@@ -1,23 +1,12 @@
-## The Video Editor's Render Script for Blender (for Blender 2.7 - 2.79b)
+## The Video Editor's Render Script for Blender 2.7 and 2.8
 
 **!NOTICE FOR BLENDER 2.8 (BETA) USERS!**
 
-I have performed some test with Blender 2.8 and noticed that using Blender 2.8's default settings are causing Blender 2.8 (with UI) render times to be 2 times as long as blender 2.79b (with UI). In addition, I am noticing that Blender 2.8 is automatically rendering across all the cores of my 4-core CPU - by default. Oddly, 2.8 is useing more processing power, yet it is rendering slower. 
+When rendering with Blender 2.8, this script will use Blender 2.79 color management settings. (You can turn it off on line 206 of the script.) This was required because the new default color management settings cause the render times to be 3X longer than 2.79. When you change blender 2.8 to use the same color management settings, render times return to normal.
 
-So I decide that I would save my blender 2.79b video project and open it in Blender 2.8 to test the render. The result was that Blender 2.8 was rending the 2.79b blend file faster than blender 2.79b. (A 12 second render, on 2.79b, was taking 8 seconds on 2.8. This is what I want to see. :)
+It is important to also note the WEBM is still broken in blender 2.8 Beta as of 5/11/2019. Once the issues with WEBM has been resolved, I will alter the script to add support.
 
-What this means:
-
-There is a default setting in blender 2.8 that is actually slowing down VSE render times. I have gone line by line through the blender 2.8 settings, comparing them to 2.79b, and can't seem to figure out what setting is causing the slowdown problem.
-
-The good news is that it looks like Multicore is working on blender 2.8 by default. But, so far, the only way to get it to work is to Save your project in blender 2.79b, then open the project and render with blender 2.8.
-
-Note: You can continue to use the Universal Blender script on Blender 2.70 - 2.79b. Do not use it on 2.8 (Yet). 
-
-Once we figure out what setting is causeing the slowdown in blender 2.8, we can finally be done with the script on future versions of blender. 
-
-**Universal Blender Script (2.70 - 2.79b):**
-(This universal script should work for every version of blender 2.7.0 and up.)
+As a final note, blender 2.8 Beta is a "Beta", so, while this script now works with it, I still recommend using 2.79b for your video editing while they work out all the kinks.  
 
 Please right click on the following link and "save as": 
 https://github.com/mikeycal/the-video-editors-render-script-for-blender/raw/master/video_editors_render_script.py
