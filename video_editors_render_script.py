@@ -56,8 +56,8 @@
 #           Mac: /Applications/Blender/blender.app/Contents/MacOS/blender
 #                /Applications/ffmpeg
 #
-#     GNU/Linux: (Install from repository, and call programs directly):
-#                blender, ffmpeg
+#     GNU/Linux: /usr/bin/blender
+#                /usr/bin/ffmpeg
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #
 # (2) PUT SCRIPT IN A FOLDER AND "SAVE AS..." 1.blend FILE TO SAME FOLDER
@@ -107,8 +107,8 @@ elif my_platform == "Darwin": # APPLE OSX PATHS BELOW
     click_me = "OSX_Click_to_Render.command"                                   #  |  Created Clickable Render File
 
 elif my_platform == "Linux": # GNU/LINUX PATHS BELOW
-    blender_path = "blender"                                                   #  |  Set to path of blender
-    path_to_ffmpeg = "ffmpeg"                                                  #  |  Set to path of ffmpeg
+    blender_path = "/usr/bin/blender"                                                   #  |  Set to path of blender
+    path_to_ffmpeg = "/usr/bin/ffmpeg"                                                  #  |  Set to path of ffmpeg
     assumed_blend_filename = "1.blend"                                         #  |  Save as... "1.blend" (Script looks for 1.blend file in directory.)
     click_me = "Linux_Click_to_Render.sh"                                      #  |  Created Clickable Render File
     terminal_cmd = "gnome-terminal -e"                                         #  |  Terminals: gnome-terminal -e, konsole -e, xterm -e, guake -e, terminator -e
@@ -131,7 +131,7 @@ else: # OTHER OPERATING SYSTEMS PATHS BELOW
 
 display_script_settings_banner = True #(Default: True) [True or False]
 banner_wait_time = 15 # seconds (Default: 15)                                  #  | Number of seconds the script will display render settings before rendering starts.
-show_cpu_core_lowram_notice = True # Default: True) [True or False]            #  | Display that we need 1.6GB to 3GB per CPU core available
+show_cpu_core_lowram_notice = False # (Default: False) [True or False]         #  | Display that we need 1.6GB to 3GB per CPU core available
 
 #--------------------------------------------------------------------#
 #---------------------------[ CPU SETTINGS ]-------------------------#---------
@@ -201,6 +201,9 @@ bypass_huffyuv_and_raw_avi_warnings = False #(Default: False ) [True or False] #
 #----[ PERMIT A 3D SCENE STRIP IN VSE ] (Experimental/ Glitchy)                #  | Scene strips are unreliable when rendering with Multiple blender instances
 permit_scene_strips = False #(Default: False) [True or False]                  #  | that have keyframed viewport objects. Instead, Render out keyframed
                                                                                #  | objects as an image sequence, import them into VSE, then use this script.
+ #----[ COLOR MANAGEMENT SPEEDUP / OVERRIDE )                                  #  
+color_management_defauts_render_speed_up = True #(Default: TRUE) [True or False]  | By default, Blender 2.8 uses Color Management settings that triple render time.
+                                                                               #  | This Sets 'View Transform'='Default' and 'Look'='None' (Which are Blender 2.79 defaults)
   #------------------------------------------------------------------#
 #>#-----------------[ .BLEND OVERRIDE FILE CONTENTS ]----------------#---------#  | This is a great place to put common settings that you somtimes forget
   #------------------------------------------------------------------#         #  | to set in your blend files. These settings are altered right before
@@ -363,6 +366,7 @@ else:
 #               GET RENDER PROPERTY SETTINGS FROM THE .BLEND FILE
 #______________________________________________________________________________
 
+
 # Blender version reported by .blend file
 blender_ver = str(bpy.data.version[0]) + "" + str(bpy.data.version[1]) + "" +\
  str(bpy.data.version[2])
@@ -510,7 +514,13 @@ if sound_strips == 0:                                                          #
     blender_audio_codec = "NONE"                                               #  | Audio Codec
 
 if blender_audio_codec != "NONE":                                              #  | If we're rendering audio, we can collect the Sample Format setting from User Pref.
-    try_sample_format = bpy.context.user_preferences.system.audio_sample_format
+
+    if blender_ver < 2800:
+        try_sample_format = bpy.context.user_preferences.system.audio_sample_format
+        
+    else: 
+        try_sample_format = bpy.context.preferences.system.audio_sample_format #  | In Blender 2.8 and higher they moved the audio format to preferences
+
     if try_sample_format in ("U8","S16","S24","S32"):
         if export_audio_format == "":
             export_audio_format = try_sample_format
@@ -521,6 +531,16 @@ if blender_audio_codec != "NONE":                                              #
         if export_audio_format =="":
             export_audio_format = "F64"
 
+#----[ Switch Color Management settings to Match 2.79 defaults]                #  | In Blender 2.8, the default color management settings were changed - it triples render time.
+
+if color_management_defauts_render_speed_up and blender_ver >= 2800:
+
+    if bpy.context.scene.view_settings.view_transform != 'Default':
+        blendfile_override_setting += "    bpy.context.scene.view_settings.view_transform = 'Default'\n"
+        
+    if bpy.context.scene.view_settings.look != 'None':
+        blendfile_override_setting += "    bpy.context.scene.view_settings.look = 'None'\n"
+        
 #______________________________________________________________________________
 #
 #                      CHECK FOR MINIMUM CPU REQUIREMENTS
@@ -795,7 +815,13 @@ if display_script_settings_banner:
 
     print(" Use [ " + str(cores_enabled) + " of "\
     + str(logical_cores_available) + " ] Logical CPU Cores\n ")
-    if show_cpu_core_lowram_notice:
+
+    if color_management_defauts_render_speed_up and blender_ver >= 2800:
+        print("| Color Mananagement Speedup Override is ON.\
+ This sets \"View Transform\" \n| and \"Look\" to 2.7X Defaults\
+ -- It's 3X faster (Script Line 205)\n")          
+
+    if show_cpu_core_lowram_notice and blender_ver >= 2790:
         print("| For best render time, each Core needs 1.6GB to 3GB RAM. Reserv\
 e more CPU |\n| Cores if you experience severe slowdown due to Low\
  RAM. (Script Line 141)|\n")
