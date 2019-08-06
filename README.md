@@ -1,12 +1,10 @@
 ## The Video Editor's Render Script for Blender 2.7 and 2.8
 
-**!NOTICE FOR BLENDER 2.8 (BETA) USERS!**
+**!NOTICE BLENDER 2.8 USERS!**
 
 When rendering with Blender 2.8, this script will use Blender 2.79 color management settings. (You can turn it off on line 206 of the script.) This was required because the new default color management settings cause the render times to be 3X longer than 2.79. When you change blender 2.8 to use the same color management settings, render times return to normal.
 
-It is important to also note the WEBM is still broken in blender 2.8 Beta as of 5/11/2019. Once the issues with WEBM has been resolved, I will alter the script to add support.
-
-As a final note, blender 2.8 Beta is a "Beta", so, while this script now works with it, I still recommend using 2.79b for your video editing while they work out all the kinks.  
+If you would like to fix render times on your video editing projects manually, simply go to "Render Properties" tab, scroll down to "Color Management" and set "View Transform" to "Standard." Blender uses "Filmic" for 3D renders, but "Standard" is prefered for Video Projects. In fact, if you use the Video Editing template that comes with blender, blender will set "view transform" to "standard" by default in that template.
 
 Please right click on the following link and "save as": 
 https://github.com/mikeycal/the-video-editors-render-script-for-blender/raw/master/video_editors_render_script.py
