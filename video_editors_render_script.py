@@ -535,8 +535,8 @@ if blender_audio_codec != "NONE":                                              #
 
 if color_management_defauts_render_speed_up and blender_ver >= 2800:
 
-    if bpy.context.scene.view_settings.view_transform != 'Default':
-        blendfile_override_setting += "    bpy.context.scene.view_settings.view_transform = 'Default'\n"
+    if bpy.context.scene.view_settings.view_transform != 'Standard':
+        blendfile_override_setting += "    bpy.context.scene.view_settings.view_transform = 'Standard'\n"
         
     if bpy.context.scene.view_settings.look != 'None':
         blendfile_override_setting += "    bpy.context.scene.view_settings.look = 'None'\n"
