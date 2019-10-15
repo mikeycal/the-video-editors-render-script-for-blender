@@ -84,6 +84,7 @@ import shutil
 import multiprocessing
 import math
 import subprocess
+import re
 from pathlib import Path
 
 #----[ DETECT OPERATING SYSTEM ]
@@ -535,8 +536,8 @@ if blender_audio_codec != "NONE":                                              #
 
 if color_management_defauts_render_speed_up and blender_ver >= 2800:
 
-    if bpy.context.scene.view_settings.view_transform != 'Default':
-        blendfile_override_setting += "    bpy.context.scene.view_settings.view_transform = 'Default'\n"
+    if bpy.context.scene.view_settings.view_transform != 'Standard':
+        blendfile_override_setting += "    bpy.context.scene.view_settings.view_transform = 'Standard'\n"
         
     if bpy.context.scene.view_settings.look != 'None':
         blendfile_override_setting += "    bpy.context.scene.view_settings.look = 'None'\n"
@@ -1479,7 +1480,20 @@ commands_to_execute = use_bash + "\"" + full_root_filepath\
 print(commands_to_execute)
 
 #----[ EXECUTE THE RENDER COMMAND FILE ]
-subprocess.call(commands_to_execute, shell=True) # run script in terminal
+proc = subprocess.Popen(commands_to_execute, shell=True, stdout=subprocess.PIPE)
+
+pattern = re.compile(' Time:') # printed after each frame has rendered
+rendered_frames = 0
+
+for line in proc.stdout:
+    if pattern.match(line.decode('utf-8')):
+        rendered_frames +=1
+        print("Progress: %02.2f%% (%d / %d)" % (
+            100 * rendered_frames / total_number_of_frames,
+            rendered_frames,
+            total_number_of_frames
+            ), end='\r')
+proc.wait()
 
 #______________________________________________________________________________
 #
