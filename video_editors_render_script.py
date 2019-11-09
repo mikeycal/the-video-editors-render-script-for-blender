@@ -84,6 +84,7 @@ import shutil
 import multiprocessing
 import math
 import subprocess
+import re
 from pathlib import Path
 
 #----[ DETECT OPERATING SYSTEM ]
@@ -132,7 +133,7 @@ else: # OTHER OPERATING SYSTEMS PATHS BELOW
 display_script_settings_banner = True #(Default: True) [True or False]
 banner_wait_time = 15 # seconds (Default: 15)                                  #  | Number of seconds the script will display render settings before rendering starts.
 show_cpu_core_lowram_notice = False # (Default: False) [True or False]         #  | Display that we need 1.6GB to 3GB per CPU core available
-
+show_render_status = False # (Default: False) [True or False]                   #  | Display frame count (It is off by default because it may be slower.) 
 #--------------------------------------------------------------------#
 #---------------------------[ CPU SETTINGS ]-------------------------#---------
 #--------------------------------------------------------------------#
@@ -202,8 +203,8 @@ bypass_huffyuv_and_raw_avi_warnings = False #(Default: False ) [True or False] #
 permit_scene_strips = False #(Default: False) [True or False]                  #  | that have keyframed viewport objects. Instead, Render out keyframed
                                                                                #  | objects as an image sequence, import them into VSE, then use this script.
  #----[ COLOR MANAGEMENT SPEEDUP / OVERRIDE )                                  #  
-color_management_defauts_render_speed_up = True #(Default: TRUE) [True or False]  | By default, Blender 2.8 uses Color Management settings that triple render time.
-                                                                               #  | This Sets 'View Transform'='Default' and 'Look'='None' (Which are Blender 2.79 defaults)
+color_management_defauts_render_speed_up = False #(Default: False) [True or False]  | By default, Blender 2.8 uses Color Management settings that triple render time.
+                                                                               #  | This Sets 'View Transform'='Standard' and 'Look'='None' (Which are Blender 2.79 defaults)
   #------------------------------------------------------------------#
 #>#-----------------[ .BLEND OVERRIDE FILE CONTENTS ]----------------#---------#  | This is a great place to put common settings that you somtimes forget
   #------------------------------------------------------------------#         #  | to set in your blend files. These settings are altered right before
@@ -535,8 +536,8 @@ if blender_audio_codec != "NONE":                                              #
 
 if color_management_defauts_render_speed_up and blender_ver >= 2800:
 
-    if bpy.context.scene.view_settings.view_transform != 'Default':
-        blendfile_override_setting += "    bpy.context.scene.view_settings.view_transform = 'Default'\n"
+    if bpy.context.scene.view_settings.view_transform != 'Standard':
+        blendfile_override_setting += "    bpy.context.scene.view_settings.view_transform = 'Standard'\n"
         
     if bpy.context.scene.view_settings.look != 'None':
         blendfile_override_setting += "    bpy.context.scene.view_settings.look = 'None'\n"
@@ -814,7 +815,12 @@ if display_script_settings_banner:
     + 17 * "#"+ "\n")
 
     print(" Use [ " + str(cores_enabled) + " of "\
-    + str(logical_cores_available) + " ] Logical CPU Cores\n ")
+    + str(logical_cores_available) + " ] Logical CPU Cores ", end =" ")
+
+    if show_render_status:
+        print(" (Show Render Status [ON] (Slower))\n")
+    else:
+        print(" (Show Render Status [OFF] (faster))\n")
 
     if color_management_defauts_render_speed_up and blender_ver >= 2800:
         print("| Color Mananagement Speedup Override is ON.\
@@ -1479,7 +1485,24 @@ commands_to_execute = use_bash + "\"" + full_root_filepath\
 print(commands_to_execute)
 
 #----[ EXECUTE THE RENDER COMMAND FILE ]
-subprocess.call(commands_to_execute, shell=True) # run script in terminal
+
+if show_render_status == False:                                                #  | Render Status happens in this section. Thanks to https://github.com/mitxela
+    subprocess.call(commands_to_execute, shell=True) # run script in terminal
+else:
+    proc = subprocess.Popen(commands_to_execute, shell=True, stdout=subprocess.PIPE)
+
+    pattern = re.compile(' Time:') # printed after each frame has rendered
+    rendered_frames = 0
+
+    for line in proc.stdout:
+        if pattern.match(line.decode('utf-8')):
+            rendered_frames +=1
+            print("Progress: %02.2f%% (%d / %d)" % (
+                100 * rendered_frames / total_number_of_frames,
+                rendered_frames,
+                total_number_of_frames
+                ), end='\r')
+    proc.wait()
 
 #______________________________________________________________________________
 #
