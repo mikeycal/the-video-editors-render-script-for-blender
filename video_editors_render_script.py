@@ -369,12 +369,10 @@ else:
 
 
 # Blender version reported by .blend file
-blender_ver = str(bpy.data.version[0]) + "" + str(bpy.data.version[1]) + "" +\
- str(bpy.data.version[2])
+blender_ver = str(bpy.data.version[0]) + "" + str(bpy.data.version[1]) + "0"  # edited out bpy.data.version[2] due to changes in blender 2.83
 blender_ver = int(blender_ver)                                                #  | 2790 int value (2.79.0)
 # Blender version being used for rendering 
-blender_ver_running = str(bpy.app.version[0]) + "" + str(bpy.app.version[1]) +\
- "" + str(bpy.app.version[2])
+blender_ver_running = str(bpy.app.version[0]) + "" + str(bpy.app.version[1]) + "0"  # edited out bpy.app.version[2] due to changes in blender 2.83
 blender_ver_running = int(blender_ver_running)
 
 if blender_ver_running != blender_ver:
