@@ -349,8 +349,10 @@ max_audio_bitrate_ac3 = 640 # kb/s (AC3)                                       #
 max_audio_bitrate_aac = 529 # kb/s (AAC)
 max_audio_bitrate_mp3 = 320 # kb/s (MP3)
 max_audio_bitrate_mp2 = 384 # kb/s (MP2)
+max_audio_bitrate_opus = 500 # kb/s (OPUS)
 min_audio_bitrate_ac3 = min_audio_bitrate_mp2 = 32 # kb/s (AC3) (MP2)
 min_audio_bitrate_aac = min_audio_bitrate_mp3 = 8 # kb/s (AAC) (MP3)
+min_audio_bitrate_opus = 45 # kb/s (OPUS)
 
 #----[ FALLBACK AUDIO BITRATES ]
 max_audio_bitrate = 320 # kb/s
@@ -759,7 +761,7 @@ bypass_huffyuv_and_raw_avi_warnings = True ) \n\n" + 80 * "#" +"\n\n Press \
 
     if blender_ver >= 2790:
         #----[ DETECT CODECS THAT DON'T SUPPORT CONSTANT RATE FACTOR ]
-        if blender_video_codec != "H264" and blender_video_codec != "MPEG4":
+        if blender_video_codec != "H264" and blender_video_codec != "MPEG4" and blender_video_codec != "WEBM":
             if blender_constant_rate_factor != "NONE":
                 subprocess.call(clr_cmd, shell=True)
                 print(80 * "#")
@@ -1212,6 +1214,9 @@ if blender_audio_codec != "NONE":
     if blender_audio_codec == "VORBIS":
         wav_to_compressed_audio += " -strict experimental"                     #  | strict experimental makes VORBIS encode work.
 
+    if blender_audio_codec == "OPUS":
+        wav_to_compressed_audio += " -strict experimental"                     #  | strict experimental makes OPUS encode work.
+
     wav_to_compressed_audio += " \"" + path_to_compressed_audio + "\""
 
     #----[ CONVERT THE AUDIO ]
@@ -1257,6 +1262,8 @@ elif blender_vid_format == "OGG":
     file_extension = ".ogv"
 elif blender_vid_format == "QUICKTIME":
     file_extension = ".mov"
+elif blender_vid_format == "WEBM": 
+    file_extension = ".webm"    
 
 #______________________________________________________________________________
 #
