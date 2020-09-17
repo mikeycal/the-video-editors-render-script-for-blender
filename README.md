@@ -1,9 +1,11 @@
-## The Video Editor's Render Script for Blender 2.7 and 2.8
-
-Thanks to **mitxela**, the script can now show Render Status. This feature is turned **off** by default because it may be slower. You can turn it on by setting **show_render_status = True** on line 136.
+## The Video Editor's Render Script for Blender 2.7, 2.8 and 2.9
  
 Please right click on the following link and "save as": 
 https://github.com/mikeycal/the-video-editors-render-script-for-blender/raw/master/video_editors_render_script.py
+
+## Notice
+ - WEBM/VP9 and OPUS support has been added. These codecs will take much longer to render than H264 and AAC.
+ - Thanks to **mitxela**, the script can now show Render Status. This feature is turned **off** by default because it may be slower. You can turn it on by setting **show_render_status = True** on line 136.
 
 ## Table of Contents:
 - [Core Features](#core-features)
