@@ -141,7 +141,7 @@ show_render_status = False # (Default: False) [True or False]                  #
 reserved_cpu_logical_cores = 0 # (Default: 0) [1 = safe mode]                  #  | "reserved_cpu_logical_cores" setting subtracts cores from the total available.
                                                                                #  | e.g. reserved_cpu_logical_cores = 3 (on a 8 core CPU) will limit the script to use only 5 of 8 cores.
 #----[ FORCE 1 BLENDER INSTANCE ] (!DISABLES MULTICORE FUNCTIONALITY!)         #  | When True, this disables multicore rendering, but it lets you use external
-force_one_instance_render = False # (Default: False) [True or False]           #  | FFmpeg with any of your blender projects. Including keyframed 3D Scenes
+force_one_instance_render = False # (Default: False) [True or False]           #  | FFmpeg with any of your Blender projects. Including keyframed 3D Scenes
                                                                                #  | Basically, this let's you render any .blend file without the interface.
 #----[ SHOULD WE BYPASS WARNINGS WHEN ONLY 1 CPU CORE IS ENABLED? ]
 bypass_low_cpu_warnings = False # (Default: False) [True or False]             #  | True will hide warning prompts and auto-select script recommended settings.
@@ -204,7 +204,7 @@ the_scaler = "lanczos" # Default: "lanczos"                                    #
 #----[ SHOULD WE BYPASS ALERTS IF ENCODE WILL BE LONGER THAN USUAL? ]
 bypass_huffyuv_and_raw_avi_warnings = False #(Default: False ) [True or False] #  | True will skip all warning prompts and render anyway.
 
-#----[ PERMIT A 3D SCENE STRIP IN VSE ] (Experimental/ Glitchy)                #  | Scene strips are unreliable when rendering with Multiple blender instances
+#----[ PERMIT A 3D SCENE STRIP IN VSE ] (Experimental/ Glitchy)                #  | Scene strips are unreliable when rendering with multiple Blender instances
 permit_scene_strips = False #(Default: False) [True or False]                  #  | that have keyframed viewport objects. Instead, Render out keyframed
                                                                                #  | objects as an image sequence, import them into VSE, then use this script.
  #----[ COLOR MANAGEMENT SPEEDUP / OVERRIDE )                                  #  
@@ -219,12 +219,13 @@ blendfile_override_setting = [
 "scene.render.ffmpeg.audio_codec = 'NONE'",                                    #  | Please leave the setting: audio_codec = 'NONE'.
 # UNHASH OR ADD OTHER OVERRIDES HERE - USING FOLLOWING FORMAT                  #  | Audio is exported and compressed seperately. Turning audio on
 #"scene.render.resolution_percentage = 100",                                   #  | will just slow down render time. By default, this script will
-#"scene.render.ffmpeg.minrate = 0",                                            #  | use the codec and bitrate you set in the blender render settings.
+#"scene.render.ffmpeg.minrate = 0",                                            #  | use the codec and bitrate you set in the Blender render settings.
 #"scene.render.ffmpeg.maxrate = 9000",                                         #
 #"scene.render.ffmpeg.muxrate = 10080000",                                     #
 #"scene.render.ffmpeg.packetsize = 2048",                                      #  | It is also worth noting that audio can't be manipulated through the override
 #"scene.render.ffmpeg.buffersize = 1792",                                      #  | file because Audio is processed at a different time than the video.
 ]                                                                              #  | Instead, audio should be configured in the Audio/Video settings (line 158)
+#>>>> END OF .BLEND OVERRIDE FILE SETTINGS <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<#
 
 #XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX#
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!#
@@ -260,8 +261,8 @@ if my_platform == "Windows": # Windows 10
 elif my_platform == "Darwin": # APPLE OSX
     slash = r"/"                                                               #  | Operating system slash direction
     start_blender = start_ffmpeg = ""                                          #  | Only Windows uses this - Set to empty
-    wait_here = "wait;"                                                        #  | this wait prevents execution until blender is done.
-    ampersand = "&"                                                            #  | This places blender instance in background.
+    wait_here = "wait;"                                                        #  | this wait prevents execution until Blender is done.
+    ampersand = "&"                                                            #  | This places Blender instance in background.
     render_filename = "render.sh"                                              #  | Executable OS Commands Stored here
     use_bash = "bash "                                                         #  | We run a bash script (render.sh)
     clr_cmd = "clear"
@@ -382,18 +383,19 @@ else:
 
 
 # Blender version reported by .blend file
-blender_ver = str(bpy.data.version[0]) + "" + str(bpy.data.version[1]) + "0"  # edited out bpy.data.version[2] due to changes in blender 2.83
+blender_ver = str(bpy.data.version[0]) + "" + str(bpy.data.version[1]) + "0"  # edited out bpy.data.version[2] due to changes in Blender 2.83
 # Blender version being used for rendering
-blender_ver_running = str(bpy.app.version[0]) + "" + str(bpy.app.version[1]) + "0"  # edited out bpy.app.version[2] due to changes in blender 2.83
+blender_ver_running = str(bpy.app.version[0]) + "" + str(bpy.app.version[1]) + "0"  # edited out bpy.app.version[2] due to changes in Blender 2.83
 
 if int(blender_ver_running) != int(blender_ver):
     subprocess.call(clr_cmd, shell=True)
     print(f'''{h_line}
  Your .blend file 'encoding section' is setup for version {blender_ver},
  but you are rendering with {blender_ver_running}.
- Please open the .blend file in blender {blender_ver_running}, configure
+ Please open the .blend file in Blender {blender_ver_running}, configure
  the encoding settings and save the .blend file. This will make sure
  that blender has set all of the correct variables for your project.
+
 {h_line}''')
     exit()
 blender_ver = int(blender_ver)                                                #  | Version integer value (ie: 2.79.0 = 2790)
@@ -410,7 +412,7 @@ for scene in bpy.data.scenes:
 
         scene_name_present = True
 
-        #Image/Video that work on all versions of blender 2.7+         (eg)
+        #Image/Video that work on all versions of Blender 2.7+         (eg)
         blender_x_resolution = scene.render.resolution_x #             (800)
         blender_y_resolution = scene.render.resolution_y #             (600)
         blender_res_percent = scene.render.resolution_percentage #     (50)
@@ -466,7 +468,7 @@ for scene in bpy.data.scenes:
         elif force_audio_mixrate != "":
             subprocess.call(clr_cmd, shell=True)
             print(f'''{h_line}
-force_audio_mixrate is set wrong in this script.\n{h_line}''')
+force_audio_mixrate is set wrong in this script.\n\n{h_line}''')
             exit()
         else:
             blender_audio_mixrate = scene.render.ffmpeg.audio_mixrate
@@ -568,9 +570,9 @@ logical_cores_available = multiprocessing.cpu_count()                          #
 #----[ SET NUMBER OF LOGICAL CPU CORES USED WITH BLENDER INSTANCES ]
 cores_enabled = logical_cores_available - reserved_cpu_logical_cores           #  | cores_enabled = actual number of video segments created
 
-if not force_one_instance_render:                                              #  | When forceOneInstanceRender = True, we render with only 1 blender instance.
+if not force_one_instance_render:                                              #  | When forceOneInstanceRender = True, we render with only 1 Blender instance.
 
-    #----[ DOES CPU HAVE MULTIPLE LOGICAL CORES ]                              #  | blender instance, with 1 core, are able to render anything you
+    #----[ DOES CPU HAVE MULTIPLE LOGICAL CORES ]                              #  | Blender instance, with 1 core, are able to render anything you
     if logical_cores_available == 1:                                           #  | want, without UI - Even 3D scenes. The benefit is that you will
         subprocess.call(clr_cmd, shell=True)                                   #  | have access to external FFmpeg features. (Audio and GIF features)
         print(f'''{h_line}
@@ -719,15 +721,15 @@ if not permit_scene_strips:                                                    #
         exit()
 
 #----[ CHECK IF LOSSLESS VIDEO CHECKBOX IS MARKED WHEN WE DON'T WANT IT ]
-if blender_use_lossless_output and blender_video_codec != 'H264':              #  | Blender leaves the lossless output checkbox set even after switching codecs.
-    subprocess.call(clr_cmd, shell=True)
-    print(f'''{h_line}
+uncheck_lossless_msg = '''
  Please open your .blend file, go to the encoding section, switch to the 'H264'
  codec, and uncheck the 'Lossless Output' checkbox. Then set your codec of
  choice. This will prevent the script from accidentally using 'Lossless Output'
  when you want to use a bitrate setting.
-
-{h_line}''')
+'''
+if blender_use_lossless_output and blender_video_codec != 'H264':              #  | Blender leaves the lossless output checkbox set even after switching codecs.
+    subprocess.call(clr_cmd, shell=True)
+    print(f'''{h_line}\n{uncheck_lossless_msg}\n\n{h_line}''')
     exit()
 
 #----[ CHECK LOSSLESS OUTPUT OPTION AGAINST CONTAINER ]                        #  | When rendering a lossless video codec, AVI is the most compatible Container.
@@ -738,10 +740,7 @@ if blender_use_lossless_output and not blender_image_sequence:
  You selected a {blender_vid_format} container to hold lossless video.
  Please reopen the blend file and change to an 'AVI' container.
  This warning also happens if you left your 'lossless output' checkbox marked.
- Please open your .blend file, go to the encoding section, switch to the 'H264'
- codec, and uncheck the 'Lossless Output' checkbox. Then set your codec of
- choice. This will prevent the script from accidentally using 'Lossless Output'
- when you want to use a bitrate setting.
+{uncheck_lossless_msg}
 
 {h_line}''')
         exit()
@@ -749,6 +748,14 @@ if blender_use_lossless_output and not blender_image_sequence:
 if not bypass_huffyuv_and_raw_avi_warnings:
 
     should_we_continue = 0 # default to continue
+    confirm_bypass_msg = f'''This is due to a long stream mapping time.
+ Use AVI(H264) [Lossless] codec instead by opening Blender and saving the
+ new setting.
+
+ ( Hide Future Warnings by setting bypass_huffyuv_and_raw_avi_warnings = True )
+
+{h_line}
+ Press [1] to CONTINUE ANYWAY or Press [ENTER/RETURN] to Quit: '''
 
     #----[ DETECT FORMATS THAT HAVE LONG FFMPEG STREAM MAPPING TIMES ]         #  | Stream Mapping takes so long that script only renders slightly faster.
     if blender_file_format == "AVI_RAW":
@@ -756,14 +763,7 @@ if not bypass_huffyuv_and_raw_avi_warnings:
             subprocess.call(clr_cmd, shell=True)
             should_we_continue = int(input(f'''{h_line}
  {blender_file_format} will only render around 10% faster than the standard
- Blender Interface. This is due to a long stream mapping time.
- Use AVI(H264) [Lossless] codec instead by opening blender and saving the
- new setting.
-
- ( Hide Future Warnings by setting bypass_huffyuv_and_raw_avi_warnings = True )
-
-{h_line}
- Press [1] to CONTINUE ANYWAY or Press [ENTER/RETURN] to Quit: '''))
+ Blender Interface. {confirm_bypass_msg}'''))
         except ValueError:
             subprocess.call(clr_cmd, shell=True)
             print("Exiting Script...")
@@ -779,14 +779,7 @@ if not bypass_huffyuv_and_raw_avi_warnings:
             subprocess.call(clr_cmd, shell=True)
             should_we_continue = int(input(f'''{h_line}
  {blender_video_codec} will render at about the same speed as the standard
- Blender Interface. This is due to a long stream mapping time.
- Use AVI(H264) [Lossless] codec instead by opening blender and
- saving the new setting.
-
- ( Hide Future Warnings by setting bypass_huffyuv_and_raw_avi_warnings = True )
-
-{h_line}
- Press [1] to CONTINUE ANYWAY or Press [ENTER/RETURN] to Quit: '''))
+ Blender Interface. {confirm_bypass_msg}'''))
         except ValueError:
             subprocess.call(clr_cmd, shell=True)
             print("Exiting Script...")
@@ -867,7 +860,7 @@ if display_script_settings_banner:
  ''')
 
     if force_one_instance_render:
-        print(" Script will Force 1 blender Instance. (MultiCore is [ OFF ])\n")
+        print(" Script will Force 1 Blender Instance. (MultiCore is [ OFF ])\n")
 
     if bypass_low_cpu_warnings:
         print(" Low CPU warnings are turned [ OFF ]\n")
@@ -902,7 +895,7 @@ if display_script_settings_banner:
         + " - " + str(end_frame_is) + " ]" + " [ Color Mode: "\
         + blender_color_mode + " ]\n"
 
-    if blender_ver < 2790: # if we are using blender 2.78c or lower display
+    if blender_ver < 2790: # if we are using Blender 2.78c or lower display
         if not blender_image_sequence:
             hide_codec = False
 
@@ -1314,7 +1307,7 @@ while next_core <= cores_enabled:
     blender_command = blender_command + start_blender
     #----[ IF WINDOWS PLATFORM IS PRESENT, CREATE INDIVIDUAL LOCK FILES ]
     if my_platform == "Windows":
-        blender_command += r'9>"%lock%' + str(next_core) + r'" '               #  | only Windows needs to create a lock file for each blender job.
+        blender_command += r'9>"%lock%' + str(next_core) + r'" '               #  | only Windows needs to create a lock file for each Blender job.
 
     blender_command +=\
         "\"" + blender_path + "\"" " -b \"%s\"" % (filename_and_path)\
@@ -1343,7 +1336,7 @@ while next_core <= cores_enabled:
 
 #----[ THE WINDOWS LOCK FILE ROUTINE (ENCAPSULATES BLENDER INSTANCE STRING) ]
 if my_platform == "Windows":                                                   #  | Without testable lock files, Windows
-                                                                               #  | doesn't WAIT to finish the blender jobs
+                                                                               #  | doesn't WAIT to finish the Blender jobs
     wait_blender_routine =\
         '@echo off\n'\
         + 'setlocal\n'\
@@ -1583,7 +1576,7 @@ if auto_delete_temp_files:
 #                               SCRIPT TIMER INFO
 #______________________________________________________________________________
 
-print(h_line + "\n\n")
+print(h_line + "\n")
 
 if blender_audio_codec != "NONE":
     #----[ TIME TO EXTRACT AUDIO ]
