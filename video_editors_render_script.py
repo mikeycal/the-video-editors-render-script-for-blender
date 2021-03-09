@@ -956,7 +956,7 @@ the first Scene showing. (First Scene is usually named, \"Scene\")\n\n"
 
     if render_gif:
         print_banner += "\n  GIF RENDER is [ ON ]\n ([ "\
-        + gif_framerate + " FPS ] [ Stats:" + stats_mode\
+        + str(gif_framerate) + " FPS ] [ Stats:" + stats_mode\
         + " ] [ Dither: " + dither_options + " ] [ X Scale: "\
         + str(gif_scale) + "] [Scaler:" + the_scaler + "])\n"
 
