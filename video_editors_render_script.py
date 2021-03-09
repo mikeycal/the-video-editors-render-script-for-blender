@@ -956,7 +956,7 @@ the first Scene showing. (First Scene is usually named, \"Scene\")\n\n"
 
     if render_gif:
         print_banner += "\n  GIF RENDER is [ ON ]\n ([ "\
-        + gif_framerate + " FPS ] [ Stats:" + stats_mode\
+        + str(gif_framerate) + " FPS ] [ Stats:" + stats_mode\
         + " ] [ Dither: " + dither_options + " ] [ X Scale: "\
         + str(gif_scale) + "] [Scaler:" + the_scaler + "])\n"
 
@@ -1036,7 +1036,7 @@ exec /bin/bash -i'\"\n\n" + "###############  ENABLE CLICKABLE / EXECUTABLE \
 SCRIPTS  ###############\n# If this script opened in a text editor rather than\
  executing\n# inside a terminal window, it's because your file browser needs\n\
 # to be set to allow executing scripts. In File Browsers like\n\
-# Nautilus, you can find this setting in the Preferences->Behavior Tab")
+# Nautilus, you can find this setting in the Preferences->Behavior Tab\n")
 
     else:
         f.write('#!/bin/bash\n'\
@@ -1050,7 +1050,7 @@ exec /bin/bash -i'\"\n\n" + "###############  ENABLE CLICKABLE / EXECUTABLE \
 SCRIPTS  ###############\n# If this script opened in a text editor rather than\
  executing\n# inside a terminal window, it's because your file browser needs\n\
 # to be set to allow executing scripts. In File Browsers like\n\
-# Nautilus, you can find this setting in the Preferences->Behavior Tab")
+# Nautilus, you can find this setting in the Preferences->Behavior Tab\n")
 
 if my_platform != "Windows":
     try:
